@@ -1,7 +1,8 @@
 .App {
-  max-width: 360px;
+  max-width: 460px;
   margin-left: auto;
   margin-right: auto;
   background-color: #f5f5f5;
-  height: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
 }
