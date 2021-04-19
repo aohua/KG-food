@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Category from "./components/Cateogory";
 import s from "./index.module.css";
 
@@ -13,6 +13,7 @@ const Categories = ({ categories, className }: Props) => {
       {categories.map((categoty, index) => {
         return (
           <Category
+            key={categoty.name}
             name={categoty.name}
             isSelected={index === selectedIndex}
             onClick={() => {

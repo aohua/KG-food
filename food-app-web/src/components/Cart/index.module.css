@@ -1,0 +1,46 @@
+:root {
+  --cart-height: 40px;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 16px;
+  padding: 8px;
+  background: #2c4c5c;
+}
+
+.cart {
+  position: fixed;
+  height: var(--cart-height);
+  width: 100%;
+  color: #ffffff;
+  background: #2c4c5c;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+.cartPanel {
+  position: fixed;
+  left: 0;
+  bottom: var(--cart-height);
+  width: 100%;
+  max-width: 100%;
+  transition: max-height 0.5s;
+  max-height: 0px;
+  background: #ffffff;
+  box-sizing: border-box;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.cartActive {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.cardPlaceholder {
+  height: var(--cart-height);
+}
