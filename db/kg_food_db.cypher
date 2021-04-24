@@ -1,5 +1,5 @@
 // Restaurant
-CREATE (putian:Restaurant {name: 'Pu Tian', category:'Chinese'})
+// CREATE (putian:Restaurant {name: 'Pu Tian', category:'Chinese'})
 
 // Ingredient
 CREATE (chicken:Ingredient:Protein:Main {name: 'Chicken'})
@@ -118,64 +118,64 @@ CREATE (fried_squid:Ingredient:Seafood:Main {name: 'Fried Squid'})
 CREATE (shanghai_green:Ingredient:Vegetable:Main {name: 'Shanghai Green'})
 
 // Dish
-CREATE (chick_garlic:Dish:Meat {id:1, dish:'Meat', name: 'Deep Fried Chicken with Garlic', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%92%9C%E9%A6%99%E9%B8%A1.jpg'})
-CREATE (pork_salt_pepper:Dish:Meat {id:2, dish:'Meat', name: 'Deep Fried Pork Trotter with Salt and Pepper', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E7%8C%AA%E6%89%8B.jpg'})
-CREATE (pork_sesame_bun:Dish:Meat {id:3, dish:'Meat', name: 'Shredded Pork with Sesame Bun', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E9%BB%84%E9%87%91%E8%8D%B7%E5%8F%B6%E5%8C%85-1.jpg'})
-CREATE (pork_lychee:Dish:Meat {id:4, dish:'Meat', name: 'Sweet and sour pork with lychee', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%8D%94%E6%9E%9D%E8%82%89.jpg'})
-CREATE (duck_yam:Dish:Meat {id:5, dish:'Meat', name: 'Deep Fried Duck with Yam', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%8A%8B%E9%A6%99%E9%B8%AD-1.jpg'})
+CREATE (chick_garlic:Dish:Meat {price:12.90, category:'Meat', name: 'Deep Fried Chicken with Garlic', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%92%9C%E9%A6%99%E9%B8%A1.jpg'})
+CREATE (pork_salt_pepper:Dish:Meat {price:12.90, category:'Meat', name: 'Deep Fried Pork Trotter with Salt and Pepper', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E7%8C%AA%E6%89%8B.jpg'})
+CREATE (pork_sesame_bun:Dish:Meat {price:10.90, category:'Meat', name: 'Shredded Pork with Sesame Bun', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E9%BB%84%E9%87%91%E8%8D%B7%E5%8F%B6%E5%8C%85-1.jpg'})
+CREATE (pork_lychee:Dish:Meat {price:15.90, category:'Meat', name: 'Sweet and sour pork with lychee', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%8D%94%E6%9E%9D%E8%82%89.jpg'})
+CREATE (duck_yam:Dish:Meat {price:20.90, category:'Meat', name: 'Deep Fried Duck with Yam', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%8A%8B%E9%A6%99%E9%B8%AD-1.jpg'})
 
-CREATE (claypot_croaker:Dish:Soup {id:6, dish:'Soup', name: 'Claypot Yellow Croaker Soup', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E7%A0%82%E9%94%85%E9%BB%84%E8%8A%B1%E9%B1%BC%E6%B1%A4.jpg'})
-CREATE (beancurd_cabbage:Dish:Soup {id:7, dish:'Soup', name: 'Braised Beancurd with Chinese Cabbage', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E7%9A%87%E7%99%BD%E8%8F%9C%E7%82%96%E8%BD%AF%E8%B1%86%E8%85%90.jpg'})
-CREATE (bian_rou:Dish:Soup {id:8, dish:'Soup', name: 'Bian Rou Soup', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E6%89%81%E8%82%89%E6%B1%A4.jpg'})
-CREATE (buddha:Dish:Soup {id:9, dish:'Soup', name: 'Buddha Jumps over the Wall', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E4%BD%9B%E8%B7%B3%E5%A2%99.jpg'})
+CREATE (claypot_croaker:Dish:Soup {price:18.90, category:'Soup', name: 'Claypot Yellow Croaker Soup', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E7%A0%82%E9%94%85%E9%BB%84%E8%8A%B1%E9%B1%BC%E6%B1%A4.jpg'})
+CREATE (beancurd_cabbage:Dish:Soup {price:15.90, category:'Soup', name: 'Braised Beancurd with Chinese Cabbage', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E7%9A%87%E7%99%BD%E8%8F%9C%E7%82%96%E8%BD%AF%E8%B1%86%E8%85%90.jpg'})
+CREATE (bian_rou:Dish:Soup {price:12.90, category:'Soup', name: 'Bian Rou Soup', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E6%89%81%E8%82%89%E6%B1%A4.jpg'})
+CREATE (buddha:Dish:Soup {price:33.90, category:'Soup', name: 'Buddha Jumps over the Wall', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E4%BD%9B%E8%B7%B3%E5%A2%99.jpg'})
 
-CREATE (hundard_second:Dish:Seafood {id:10, dish:'Seafood', name: '100-Second Stewed Yellow Croaker', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E7%99%BE%E7%A7%92%E9%BB%84%E8%8A%B1%E9%B1%BC.jpg'})
-CREATE (pan_fried_croaker:Dish:Seafood {id:11, dish:'Seafood', name: 'Pan-fried Yellow Croakers', image: 'https://www.putien.com/wp-content/uploads/2020/07/14.jpg'})
-CREATE (herbal_prawn:Dish:Seafood {id:12, dish:'Seafood', name: 'Herbal Tiger Prawn', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E9%85%92%E9%A6%99%E8%8D%AF%E8%86%B3%E8%99%BE.jpg'})
-CREATE (deep_fried_tenggiri:Dish:Seafood {id:13, dish:'Seafood', name: 'Deep-fried Tenggiri Fish', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E9%A9%AC%E9%B2%9B%E9%B1%BC.jpg'})
-CREATE (steamed_prawn:Dish:Seafood {id:14, dish:'Seafood', name: 'Steamed Prawn with Minced Garlic', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%92%9C%E8%93%89%E8%92%B8%E8%99%BE.jpg'})
-CREATE (chili_clams:Dish:Seafood {id:15, dish:'Seafood', name: 'Stir-fried Chilli Clams', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%BE%A3%E6%B1%81%E5%95%A6%E5%95%A6.jpg'})
-CREATE (crispy_oyster:Dish:Seafood {id:16, dish:'Seafood', name: 'Crispy Oyster', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E4%B8%80%E5%93%81%E6%B5%B7%E8%9B%8E%E7%85%8E.jpg'})
+CREATE (hundard_second:Dish:Seafood {price:20.90, category:'Seafood', name: '100-Second Stewed Yellow Croaker', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E7%99%BE%E7%A7%92%E9%BB%84%E8%8A%B1%E9%B1%BC.jpg'})
+CREATE (pan_fried_croaker:Dish:Seafood {price:18.90, category:'Seafood', name: 'Pan-fried Yellow Croakers', image: 'https://www.putien.com/wp-content/uploads/2020/07/14.jpg'})
+CREATE (herbal_prawn:Dish:Seafood {price:18.90, category:'Seafood', name: 'Herbal Tiger Prawn', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E9%85%92%E9%A6%99%E8%8D%AF%E8%86%B3%E8%99%BE.jpg'})
+CREATE (deep_fried_tenggiri:Dish:Seafood {price:21.90, category:'Seafood', name: 'Deep-fried Tenggiri Fish', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E9%A9%AC%E9%B2%9B%E9%B1%BC.jpg'})
+CREATE (steamed_prawn:Dish:Seafood {price:16.90, category:'Seafood', name: 'Steamed Prawn with Minced Garlic', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%92%9C%E8%93%89%E8%92%B8%E8%99%BE.jpg'})
+CREATE (chili_clams:Dish:Seafood {price:21.90, category:'Seafood', name: 'Stir-fried Chilli Clams', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%BE%A3%E6%B1%81%E5%95%A6%E5%95%A6.jpg'})
+CREATE (crispy_oyster:Dish:Seafood {price:21.90, category:'Seafood', name: 'Crispy Oyster', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E4%B8%80%E5%93%81%E6%B5%B7%E8%9B%8E%E7%85%8E.jpg'})
 
-CREATE (bamboo_shoot:Dish:Starter {id:17, dish:'Starter', name: 'Braised Bamboo Shoot', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%AE%B6%E5%B8%B8%E7%84%96%E7%AC%8B%E5%B9%B2.jpg'})
-CREATE (iced_bitter_gourd:Dish:Starter {id:18, dish:'Starter', name: 'Iced Bitter Gourd', image: 'https://www.putien.com/wp-content/uploads/2020/07/07.jpg'})
-CREATE (starter:Dish:Starter {id:19, dish:'Starter', name: 'Starters Platter', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%9B%9B%E5%B0%8F%E6%8B%BC.jpg'})
-CREATE (drunken_cockle:Dish:Starter {id:20, dish:'Starter', name: 'Drunken Cockles', image: 'https://www.putien.com/wp-content/uploads/2020/05/cockles2.jpg'})
-CREATE (deep_fried_croaker:Dish:Starter {id:21, dish:'Starter', name: 'Deep-fried Yellow Croaker', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%92%B8%E9%A6%99%E9%85%A5%E8%84%86%E9%BB%84%E8%8A%B1%E9%B1%BC.jpg'})
-CREATE (braised_intestine:Dish:Starter {id:22, dish:'Starter', name: 'Braised Pig Intestine', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E4%B9%9D%E8%BD%AC%E5%B0%8F%E8%82%A0.jpg'})
-CREATE (ice_abalone:Dish:Starter {id:23, dish:'Starter', name: 'Iced Nanri Abalone', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%8D%97%E6%97%A5%E9%B2%8D.jpg'})
-CREATE (pork_trotter:Dish:Starter {id:24, dish:'Starter', name: 'Cold Pork Trotters Jelly', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E6%B0%B4%E6%99%B6%E7%8C%AA%E8%B9%84%E5%86%BB.jpg'})
-CREATE (seaweed_shrimps:Dish:Starter {id:25, dish:'Starter', name: 'Seaweed with Mini Shrimps Dressed with Sauce', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%A4%B4%E6%B0%B4%E7%B4%AB%E8%8F%9C.jpg'})
+CREATE (bamboo_shoot:Dish:Starter {price:12.90, category:'Starter', name: 'Braised Bamboo Shoot', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%AE%B6%E5%B8%B8%E7%84%96%E7%AC%8B%E5%B9%B2.jpg'})
+CREATE (iced_bitter_gourd:Dish:Starter {price:12.90, category:'Starter', name: 'Iced Bitter Gourd', image: 'https://www.putien.com/wp-content/uploads/2020/07/07.jpg'})
+CREATE (starter:Dish:Starter {price:12.90, category:'Starter', name: 'Starters Platter', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%9B%9B%E5%B0%8F%E6%8B%BC.jpg'})
+CREATE (drunken_cockle:Dish:Starter {price:12.90, category:'Starter', name: 'Drunken Cockles', image: 'https://www.putien.com/wp-content/uploads/2020/05/cockles2.jpg'})
+CREATE (deep_fried_croaker:Dish:Starter {price:15.90, category:'Starter', name: 'Deep-fried Yellow Croaker', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%92%B8%E9%A6%99%E9%85%A5%E8%84%86%E9%BB%84%E8%8A%B1%E9%B1%BC.jpg'})
+CREATE (braised_intestine:Dish:Starter {price:18.90, category:'Starter', name: 'Braised Pig Intestine', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E4%B9%9D%E8%BD%AC%E5%B0%8F%E8%82%A0.jpg'})
+CREATE (ice_abalone:Dish:Starter {price:20.90, category:'Starter', name: 'Iced Nanri Abalone', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%8D%97%E6%97%A5%E9%B2%8D.jpg'})
+CREATE (pork_trotter:Dish:Starter {price:12.90, category:'Starter', name: 'Cold Pork Trotters Jelly', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E6%B0%B4%E6%99%B6%E7%8C%AA%E8%B9%84%E5%86%BB.jpg'})
+CREATE (seaweed_shrimps:Dish:Starter {price:15.90, category:'Starter', name: 'Seaweed with Mini Shrimps Dressed with Sauce', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%A4%B4%E6%B0%B4%E7%B4%AB%E8%8F%9C.jpg'})
 
-CREATE (loquat_jelly:Dish:Dessert {id:26, dish:'Dessert', name: 'Chilled Loquat in Herbal Jelly', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E6%9E%87%E6%9D%B7%E5%86%BB-1.jpg'})
-CREATE (lotus_seed_fungus:Dish:Dessert {id:27, dish:'Dessert', name: 'Lotus Seed with White Fungus Soup', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%8E%B2%E5%AD%90%E9%9B%AA%E8%80%B3%E6%B1%A4-1.jpg'})
-CREATE (pear_osmanthus:Dish:Dessert {id:28, dish:'Dessert', name: 'Double-boiled Pear with Osmanthus and Aged Mandarin Peel', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E6%A1%82%E8%8A%B1%E9%99%88%E7%9A%AE%E7%82%96%E9%9B%AA%E6%A2%A8.jpg'})
-CREATE (durian_puree:Dish:Dessert {id:29, dish:'Dessert', name: 'Deep-fried Durian Puree', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%86%B0%E5%BF%83%E6%A6%B4%E8%8E%B2.jpg'})
+CREATE (loquat_jelly:Dish:Dessert {price:8.90, category:'Dessert', name: 'Chilled Loquat in Herbal Jelly', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E6%9E%87%E6%9D%B7%E5%86%BB-1.jpg'})
+CREATE (lotus_seed_fungus:Dish:Dessert {price:9.90, category:'Dessert', name: 'Lotus Seed with White Fungus Soup', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%8E%B2%E5%AD%90%E9%9B%AA%E8%80%B3%E6%B1%A4-1.jpg'})
+CREATE (pear_osmanthus:Dish:Dessert {price:5.90, category:'Dessert', name: 'Double-boiled Pear with Osmanthus and Aged Mandarin Peel', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E6%A1%82%E8%8A%B1%E9%99%88%E7%9A%AE%E7%82%96%E9%9B%AA%E6%A2%A8.jpg'})
+CREATE (durian_puree:Dish:Dessert {price:8.90, category:'Dessert', name: 'Deep-fried Durian Puree', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%86%B0%E5%BF%83%E6%A6%B4%E8%8E%B2.jpg'})
 
-CREATE (spinach_stock:Dish:Vegetable {id:30, dish:'Vegetable', name: 'Spinach in Supreme Stock', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E4%B8%8A%E6%B1%A4%E8%8B%8B%E8%8F%9C.jpg'})
-CREATE (stir_fried_yam:Dish:Vegetable {id:31, dish:'Vegetable', name: 'Stir-fried Yam', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%8A%8B%E8%8A%AF.jpg'})
-CREATE (braised_bitter_gourd:Dish:Vegetable {id:32, dish:'Vegetable', name: 'Braised Bitter Gourd', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E9%A3%8E%E5%91%B3%E7%84%96%E8%8B%A6%E7%93%9C.jpg'})
-CREATE (homemade_bean_curd:Dish:Vegetable {id:33, dish:'Vegetable', name: 'Hot Plate Homemade Bean Curd', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E9%93%81%E6%9D%BF%E6%BB%91%E8%B1%86%E8%85%90.jpg'})
-CREATE (kailan_bean_curd:Dish:Vegetable {id:34, dish:'Vegetable', name: 'Stir-fried Kailan with Bean Curd Skin', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%8A%A5%E5%85%B0%E8%B1%86%E7%9A%AE-1.jpg'})
+CREATE (spinach_stock:Dish:Vegetable {price:12.90, category:'Vegetable', name: 'Spinach in Supreme Stock', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E4%B8%8A%E6%B1%A4%E8%8B%8B%E8%8F%9C.jpg'})
+CREATE (stir_fried_yam:Dish:Vegetable {price:12.90, category:'Vegetable', name: 'Stir-fried Yam', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%8A%8B%E8%8A%AF.jpg'})
+CREATE (braised_bitter_gourd:Dish:Vegetable {price:12.90, category:'Vegetable', name: 'Braised Bitter Gourd', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E9%A3%8E%E5%91%B3%E7%84%96%E8%8B%A6%E7%93%9C.jpg'})
+CREATE (homemade_bean_curd:Dish:Vegetable {price:10.90, category:'Vegetable', name: 'Hot Plate Homemade Bean Curd', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E9%93%81%E6%9D%BF%E6%BB%91%E8%B1%86%E8%85%90.jpg'})
+CREATE (kailan_bean_curd:Dish:Vegetable {price:15.90, category:'Vegetable', name: 'Stir-fried Kailan with Bean Curd Skin', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%8A%A5%E5%85%B0%E8%B1%86%E7%9A%AE-1.jpg'})
 
-CREATE (mushroom_seafood_lor_mee:Dish:Main {id:35, dish:'Main', name: 'Fujian Red Mushroom Seafood Lor Mee', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E7%BA%A2%E8%8F%87%E5%8D%A4%E9%9D%A2.jpg'})
-CREATE (heng_hua_bee_hoon:Dish:Main {id:36, dish:'Main', name: 'Fried Heng Hwa Bee Hoon', image:'https://www.putien.com/wp-content/uploads/2021/03/%E5%85%B4%E5%8C%96%E7%82%92%E7%B1%B3%E7%B2%89-1.jpg'})
-CREATE (cabbage_rice:Dish:Main {id:37, dish:'Main', name: 'Cabbage Rice', image:'https://www.putien.com/wp-content/uploads/2021/03/%E5%8C%85%E8%8F%9C%E9%A5%AD.jpg'})
-CREATE (ca_fan:Dish:Main {id:38, dish:'Main', name: 'PUTIEN Ca Fen', image:'https://www.putien.com/wp-content/uploads/2021/03/%E5%86%9C%E5%AE%B6%E6%93%A6%E7%B2%89-1.jpg'})
+CREATE (mushroom_seafood_lor_mee:Dish:Main {price:15.90, category:'Main', name: 'Fujian Red Mushroom Seafood Lor Mee', image: 'https://www.putien.com/wp-content/uploads/2021/03/%E7%BA%A2%E8%8F%87%E5%8D%A4%E9%9D%A2.jpg'})
+CREATE (heng_hua_bee_hoon:Dish:Main {price:17.90, category:'Main', name: 'Fried Heng Hwa Bee Hoon', image:'https://www.putien.com/wp-content/uploads/2021/03/%E5%85%B4%E5%8C%96%E7%82%92%E7%B1%B3%E7%B2%89-1.jpg'})
+CREATE (cabbage_rice:Dish:Main {price:15.90, category:'Main', name: 'Cabbage Rice', image:'https://www.putien.com/wp-content/uploads/2021/03/%E5%8C%85%E8%8F%9C%E9%A5%AD.jpg'})
+CREATE (ca_fan:Dish:Main {price:17.90, category:'Main', name: 'PUTIEN Ca Fen', image:'https://www.putien.com/wp-content/uploads/2021/03/%E5%86%9C%E5%AE%B6%E6%93%A6%E7%B2%89-1.jpg'})
 
-CREATE (ba_hong_bao:Dish:Drink {id:39, dish:'Drink', name: 'Wuyi Mountain Early Spring Da Hong Pao', alcohol:false, type:["Hot"], image: 'https://www.putien.com/wp-content/uploads/2020/07/50.jpg'})
-CREATE (barley:Dish:Drink {id:40, dish:'Drink', name: 'Pearl Barley with Winter Melon', alcohol:false, type:["Hot", "Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/53.jpg'})
-CREATE (baybery_tea:Dish:Drink {id:41, dish:'Drink', name: 'Bayberry Tea with Iced Berry Cubes', alcohol:false, type:["Hot", "Cold"], image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%86%B0%E7%A0%96%E6%9D%A8%E6%A2%85%E6%B0%B4.jpg'})
-CREATE (chrysanthemum:Dish:Drink {id:42, dish:'Drink', name: 'Chrysanthemum Tea', alcohol:false, type:["Hot", "Cold"], image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%83%8E%E8%8F%8A%E8%8C%B6-1.jpg'})
-CREATE (corn_juice:Dish:Drink {id:43, dish:'Drink', name: 'Sweet Corn Juice', alcohol:false, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/54.jpg'})
-CREATE (soursop:Dish:Drink {id:44, dish:'Drink', name: 'Soursop Juice', alcohol:false, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/55.jpg'})
-CREATE (sprite:Dish:Drink {id:45, dish:'Drink', name: 'Sprite', alcohol:false, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/62.jpg'})
-CREATE (coke:Dish:Drink {id:46, dish:'Drink', name: 'Coke', alcohol:false, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/61.jpg'})
-CREATE (tiger:Dish:Drink {id:47, dish:'Drink', name: 'Tiger beer', alcohol:true, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/64.jpg'})
-CREATE (mineral_water:Dish:Drink {id:48, dish:'Drink', name: 'Mineral Water', alcohol:false, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/63.jpg'})
-CREATE (white_beer:Dish:Drink {id:49, dish:'Drink', name: '1664 White Beer', alcohol:true, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/65.jpg'})
-CREATE (hoegaarden:Dish:Drink {id:50, dish:'Drink', name: 'Hoegaarden', alcohol:true, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/66.jpg'})
-CREATE (maotai:Dish:Drink {id:51, dish:'Drink', name: 'Guizhou Maotai', alcohol:true, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/68.jpg'})
+CREATE (ba_hong_bao:Dish:Drink {price:2.90, category:'Drink', name: 'Wuyi Mountain Early Spring Da Hong Pao', alcohol:false, type:["Hot"], image: 'https://www.putien.com/wp-content/uploads/2020/07/50.jpg'})
+CREATE (barley:Dish:Drink {price:2.90, category:'Drink', name: 'Pearl Barley with Winter Melon', alcohol:false, type:["Hot", "Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/53.jpg'})
+CREATE (baybery_tea:Dish:Drink {price:5.90, category:'Drink', name: 'Bayberry Tea with Iced Berry Cubes', alcohol:false, type:["Hot", "Cold"], image: 'https://www.putien.com/wp-content/uploads/2021/03/%E5%86%B0%E7%A0%96%E6%9D%A8%E6%A2%85%E6%B0%B4.jpg'})
+CREATE (chrysanthemum:Dish:Drink {price:2.90, category:'Drink', name: 'Chrysanthemum Tea', alcohol:false, type:["Hot", "Cold"], image: 'https://www.putien.com/wp-content/uploads/2021/03/%E8%83%8E%E8%8F%8A%E8%8C%B6-1.jpg'})
+CREATE (corn_juice:Dish:Drink {price:2.90, category:'Drink', name: 'Sweet Corn Juice', alcohol:false, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/54.jpg'})
+CREATE (soursop:Dish:Drink {price:2.90, category:'Drink', name: 'Soursop Juice', alcohol:false, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/55.jpg'})
+CREATE (sprite:Dish:Drink {price:1.90, category:'Drink', name: 'Sprite', alcohol:false, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/62.jpg'})
+CREATE (coke:Dish:Drink {price:1.90, category:'Drink', name: 'Coke', alcohol:false, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/61.jpg'})
+CREATE (tiger:Dish:Drink {price:10.90, category:'Drink', name: 'Tiger beer', alcohol:true, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/64.jpg'})
+CREATE (mineral_water:Dish:Drink {price:1.90, category:'Drink', name: 'Mineral Water', alcohol:false, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/63.jpg'})
+CREATE (white_beer:Dish:Drink {price:10.90, category:'Drink', name: '1664 White Beer', alcohol:true, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/65.jpg'})
+CREATE (hoegaarden:Dish:Drink {price:10.90, category:'Drink', name: 'Hoegaarden', alcohol:true, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/66.jpg'})
+CREATE (maotai:Dish:Drink {price:15.90, category:'Drink', name: 'Guizhou Maotai', alcohol:true, type:["Cold"], image: 'https://www.putien.com/wp-content/uploads/2020/07/68.jpg'})
 
 // Relationship
 CREATE
@@ -557,55 +557,55 @@ CREATE
 (ca_fan)-[:CONTAINS {quantity:300, unit:'gram'}]->(rice),
 (ca_fan)-[:CONTAINS {quantity:100, unit:'gram'}]->(chicken_essence)
 
-CREATE
-(putian)-[:OFFERS {dish:'Meat'}]->(chick_garlic),
-(putian)-[:OFFERS {dish:'Meat'}]->(pork_salt_pepper),
-(putian)-[:OFFERS {dish:'Meat'}]->(pork_sesame_bun),
-(putian)-[:OFFERS {dish:'Meat'}]->(pork_lychee),
-(putian)-[:OFFERS {dish:'Meat'}]->(duck_yam),
-(putian)-[:OFFERS {dish:'Soup'}]->(claypot_croaker),
-(putian)-[:OFFERS {dish:'Soup'}]->(beancurd_cabbage),
-(putian)-[:OFFERS {dish:'Soup'}]->(bian_rou),
-(putian)-[:OFFERS {dish:'Soup'}]->(buddha),
-(putian)-[:OFFERS {dish:'Seafood'}]->(hundard_second),
-(putian)-[:OFFERS {dish:'Seafood'}]->(pan_fried_croaker),
-(putian)-[:OFFERS {dish:'Seafood'}]->(herbal_prawn),
-(putian)-[:OFFERS {dish:'Seafood'}]->(deep_fried_tenggiri),
-(putian)-[:OFFERS {dish:'Seafood'}]->(steamed_prawn),
-(putian)-[:OFFERS {dish:'Seafood'}]->(chili_clams),
-(putian)-[:OFFERS {dish:'Seafood'}]->(crispy_oyster),
-(putian)-[:OFFERS {dish:'Starter'}]->(bamboo_shoot),
-(putian)-[:OFFERS {dish:'Starter'}]->(iced_bitter_gourd),
-(putian)-[:OFFERS {dish:'Starter'}]->(starter),
-(putian)-[:OFFERS {dish:'Starter'}]->(drunken_cockle),
-(putian)-[:OFFERS {dish:'Starter'}]->(deep_fried_croaker),
-(putian)-[:OFFERS {dish:'Starter'}]->(braised_intestine),
-(putian)-[:OFFERS {dish:'Starter'}]->(ice_abalone),
-(putian)-[:OFFERS {dish:'Starter'}]->(pork_trotter),
-(putian)-[:OFFERS {dish:'Starter'}]->(seaweed_shrimps),
-(putian)-[:OFFERS {dish:'Dessert'}]->(loquat_jelly),
-(putian)-[:OFFERS {dish:'Dessert'}]->(lotus_seed_fungus),
-(putian)-[:OFFERS {dish:'Dessert'}]->(pear_osmanthus),
-(putian)-[:OFFERS {dish:'Dessert'}]->(durian_puree),
-(putian)-[:OFFERS {dish:'Vegetable'}]->(spinach_stock),
-(putian)-[:OFFERS {dish:'Vegetable'}]->(stir_fried_yam),
-(putian)-[:OFFERS {dish:'Vegetable'}]->(braised_bitter_gourd),
-(putian)-[:OFFERS {dish:'Vegetable'}]->(homemade_bean_curd),
-(putian)-[:OFFERS {dish:'Vegetable'}]->(kailan_bean_curd),
-(putian)-[:OFFERS {dish:'Main'}]->(mushroom_seafood_lor_mee),
-(putian)-[:OFFERS {dish:'Main'}]->(heng_hua_bee_hoon),
-(putian)-[:OFFERS {dish:'Main'}]->(cabbage_rice),
-(putian)-[:OFFERS {dish:'Main'}]->(ca_fan),
-(putian)-[:OFFERS {dish:'Drink'}]->(ba_hong_bao),
-(putian)-[:OFFERS {dish:'Drink'}]->(barley),
-(putian)-[:OFFERS {dish:'Drink'}]->(baybery_tea),
-(putian)-[:OFFERS {dish:'Drink'}]->(chrysanthemum),
-(putian)-[:OFFERS {dish:'Drink'}]->(corn_juice),
-(putian)-[:OFFERS {dish:'Drink'}]->(soursop),
-(putian)-[:OFFERS {dish:'Drink'}]->(sprite),
-(putian)-[:OFFERS {dish:'Drink'}]->(coke),
-(putian)-[:OFFERS {dish:'Drink'}]->(tiger),
-(putian)-[:OFFERS {dish:'Drink'}]->(mineral_water),
-(putian)-[:OFFERS {dish:'Drink'}]->(white_beer),
-(putian)-[:OFFERS {dish:'Drink'}]->(hoegaarden),
-(putian)-[:OFFERS {dish:'Drink'}]->(maotai)
+// CREATE
+// (putian)-[:OFFERS {dish:'Meat'}]->(chick_garlic),
+// (putian)-[:OFFERS {dish:'Meat'}]->(pork_salt_pepper),
+// (putian)-[:OFFERS {dish:'Meat'}]->(pork_sesame_bun),
+// (putian)-[:OFFERS {dish:'Meat'}]->(pork_lychee),
+// (putian)-[:OFFERS {dish:'Meat'}]->(duck_yam),
+// (putian)-[:OFFERS {dish:'Soup'}]->(claypot_croaker),
+// (putian)-[:OFFERS {dish:'Soup'}]->(beancurd_cabbage),
+// (putian)-[:OFFERS {dish:'Soup'}]->(bian_rou),
+// (putian)-[:OFFERS {dish:'Soup'}]->(buddha),
+// (putian)-[:OFFERS {dish:'Seafood'}]->(hundard_second),
+// (putian)-[:OFFERS {dish:'Seafood'}]->(pan_fried_croaker),
+// (putian)-[:OFFERS {dish:'Seafood'}]->(herbal_prawn),
+// (putian)-[:OFFERS {dish:'Seafood'}]->(deep_fried_tenggiri),
+// (putian)-[:OFFERS {dish:'Seafood'}]->(steamed_prawn),
+// (putian)-[:OFFERS {dish:'Seafood'}]->(chili_clams),
+// (putian)-[:OFFERS {dish:'Seafood'}]->(crispy_oyster),
+// (putian)-[:OFFERS {dish:'Starter'}]->(bamboo_shoot),
+// (putian)-[:OFFERS {dish:'Starter'}]->(iced_bitter_gourd),
+// (putian)-[:OFFERS {dish:'Starter'}]->(starter),
+// (putian)-[:OFFERS {dish:'Starter'}]->(drunken_cockle),
+// (putian)-[:OFFERS {dish:'Starter'}]->(deep_fried_croaker),
+// (putian)-[:OFFERS {dish:'Starter'}]->(braised_intestine),
+// (putian)-[:OFFERS {dish:'Starter'}]->(ice_abalone),
+// (putian)-[:OFFERS {dish:'Starter'}]->(pork_trotter),
+// (putian)-[:OFFERS {dish:'Starter'}]->(seaweed_shrimps),
+// (putian)-[:OFFERS {dish:'Dessert'}]->(loquat_jelly),
+// (putian)-[:OFFERS {dish:'Dessert'}]->(lotus_seed_fungus),
+// (putian)-[:OFFERS {dish:'Dessert'}]->(pear_osmanthus),
+// (putian)-[:OFFERS {dish:'Dessert'}]->(durian_puree),
+// (putian)-[:OFFERS {dish:'Vegetable'}]->(spinach_stock),
+// (putian)-[:OFFERS {dish:'Vegetable'}]->(stir_fried_yam),
+// (putian)-[:OFFERS {dish:'Vegetable'}]->(braised_bitter_gourd),
+// (putian)-[:OFFERS {dish:'Vegetable'}]->(homemade_bean_curd),
+// (putian)-[:OFFERS {dish:'Vegetable'}]->(kailan_bean_curd),
+// (putian)-[:OFFERS {dish:'Main'}]->(mushroom_seafood_lor_mee),
+// (putian)-[:OFFERS {dish:'Main'}]->(heng_hua_bee_hoon),
+// (putian)-[:OFFERS {dish:'Main'}]->(cabbage_rice),
+// (putian)-[:OFFERS {dish:'Main'}]->(ca_fan),
+// (putian)-[:OFFERS {dish:'Drink'}]->(ba_hong_bao),
+// (putian)-[:OFFERS {dish:'Drink'}]->(barley),
+// (putian)-[:OFFERS {dish:'Drink'}]->(baybery_tea),
+// (putian)-[:OFFERS {dish:'Drink'}]->(chrysanthemum),
+// (putian)-[:OFFERS {dish:'Drink'}]->(corn_juice),
+// (putian)-[:OFFERS {dish:'Drink'}]->(soursop),
+// (putian)-[:OFFERS {dish:'Drink'}]->(sprite),
+// (putian)-[:OFFERS {dish:'Drink'}]->(coke),
+// (putian)-[:OFFERS {dish:'Drink'}]->(tiger),
+// (putian)-[:OFFERS {dish:'Drink'}]->(mineral_water),
+// (putian)-[:OFFERS {dish:'Drink'}]->(white_beer),
+// (putian)-[:OFFERS {dish:'Drink'}]->(hoegaarden),
+// (putian)-[:OFFERS {dish:'Drink'}]->(maotai)
