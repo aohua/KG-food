@@ -108,7 +108,7 @@ class SimilarItems(Resource):
             return list(tx.run(
                 '''
                 MATCH (n:Dish)-[:CONTAINS]->(m:Ingredient:Main)<-[:CONTAINS]-(o:Dish)
-                WHERE o.id <> n:id
+                WHERE o <> n
                 RETURN ID(n), m.name, ID(o)
                 ORDER BY n.name
                 '''
