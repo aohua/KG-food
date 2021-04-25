@@ -1,5 +1,12 @@
 import { useState } from 'react';
 
+export const KEYS = {
+    DISHS: "dishs",
+    ORDERS: "orders",
+    CART: "cart",
+    CATEGORIES: "categories"
+}
+
 function useLocalStorage<T>(name: string, initValue: T): [T, (value: T) => void] {
     const [state, setState] = useState(initValue);
     const setLocalStorage = (value: T) => {

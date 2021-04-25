@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
-import { GlobalContext } from "context";
+import { Dish, GlobalContext } from "context";
+import useLocalStorage, { KEYS } from "hooks/useLocalStorage";
 import Tab from "./components/Tab";
 import Order from "./components/Order";
 import AddDishForm from "./components/AddDishForm";
@@ -10,6 +11,8 @@ const Admin = () => {
   const [showOrders, setShowOrders] = useState(true);
   const { orders } = useContext(GlobalContext);
   const history = useHistory();
+  const [dishs, setDishs] = useLocalStorage<Dish[]>(KEYS.DISHS, []);
+  const [categories, setCategories] = useLocalStorage(KEYS.CATEGORIES, []);
   return (
     <div>
       <Tab
@@ -42,8 +45,17 @@ const Admin = () => {
           </Button>
           <Button
             style={{ marginTop: 8 }}
-            onClick={() => {
-              // TODO: upload orders
+            onClick={async () => {
+              // update dishs
+              const dishResponse = await fetch("http://127.0.0.1:5000/dish");
+              const dishsFromApi = await dishResponse.json();
+              setDishs(dishsFromApi);
+              // update categories
+              const categoriesResponse = await fetch(
+                "http://127.0.0.1:5000/category"
+              );
+              const categoriesFromApi = await categoriesResponse.json();
+              setCategories(categoriesFromApi);
             }}
           >
             Sync Menu

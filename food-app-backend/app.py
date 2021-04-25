@@ -13,7 +13,7 @@ FlaskJSON(app)
 
 # db connection
 DATABASE_USERNAME = 'neo4j'
-DATABASE_PASSWORD = 'kg_food'
+DATABASE_PASSWORD = 'asdf'
 DATABASE_URL = 'bolt://localhost'
 driver = GraphDatabase.driver(DATABASE_URL, auth=basic_auth(DATABASE_USERNAME, str(DATABASE_PASSWORD)))
 
@@ -75,7 +75,7 @@ class Category(Resource):
                     serialise_category.append(category_record)
                 category_record = {'category':record['n.category'], 'dishes':[]}
             
-            dish = {'name': record['n.name']}
+            dish = record['ID(n)']
             category_record['dishes'].append(dish)
         
         serialise_category.append(category_record) # last category

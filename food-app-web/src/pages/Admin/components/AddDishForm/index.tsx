@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { Dish } from "context";
 import Button from "components/Button";
-import useLocalStorage from "hooks/useLocalStorage";
+import useLocalStorage, { KEYS } from "hooks/useLocalStorage";
 import s from "./index.module.css";
 
 const AddDishForm = () => {
@@ -9,7 +9,7 @@ const AddDishForm = () => {
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [dishs, setDishs] = useLocalStorage<Dish[]>("dishs", []);
+  const [dishs, setDishs] = useLocalStorage<Dish[]>(KEYS.DISHS, []);
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     let lastId = 0;

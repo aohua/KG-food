@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import Header from "components/Header";
@@ -8,13 +8,38 @@ import Link from "components/Link";
 import Categories from "components/Categories";
 import ItemCard from "components/ItemCard";
 
+import useLocalStorage, { KEYS } from "hooks/useLocalStorage";
+
 import s from "./index.module.css";
+import { Dish } from "context";
+
+type Category = {
+  category: string;
+  dishes: string[];
+};
 
 function Menu() {
   const history = useHistory();
+  const [selectedCat, setSelectedCat] = useState("Recommended");
+  const [dishs, setDishs] = useLocalStorage<Dish[]>(KEYS.DISHS, []);
+  const [categories] = useLocalStorage<Category[]>(KEYS.CATEGORIES, []);
   const handleItemCardOnClick = (id: string) => {
     history.push(`/food/${id}`);
   };
+  const categoriesMap = React.useMemo(() => {
+    const categoriesMap: { [key: string]: Category } = {};
+    categories.forEach((category) => {
+      categoriesMap[category.category] = category;
+    });
+    return categoriesMap;
+  }, [categories]);
+  const dishsMap = React.useMemo(() => {
+    const dishsMap: { [key: string]: Dish } = {};
+    dishs.forEach((dish) => {
+      dishsMap[dish.id] = dish;
+    });
+    return dishsMap;
+  }, [dishs]);
   return (
     <div>
       <Header location="Blk 123 Eunos Ave 1 #12-123" numOfStores={2} est={40} />
@@ -24,62 +49,30 @@ function Menu() {
           <Link>Putien</Link>
         </Links>
         <Categories
-          categories={[
-            { name: "Recommended" },
-            { name: "Mains" },
-            { name: "Sides" },
-            { name: "Drinks" },
-            { name: "Drinks" },
-          ]}
+          categories={[{ name: "Recommended" }].concat(
+            categories.map((category) => ({
+              name: category.category,
+            }))
+          )}
           className={s.categories}
+          onSelect={(name) => {
+            setSelectedCat(name);
+          }}
         />
       </Paper>
       <div className={s.itemCardContainer}>
-        <ItemCard
-          id={"1"}
-          itemName={"Pan-fried Yellow Croakers"}
-          itemPrice={"$15.90"}
-          url={
-            "https://firebasestorage.googleapis.com/v0/b/kg-food.appspot.com/o/%E5%AE%B6%E5%B8%B8%E7%84%96%E7%AC%8B%E5%B9%B2.jpeg?alt=media&token=ec408d99-f8b5-4571-9e3e-f4a6e697f429"
-          }
-          onClick={handleItemCardOnClick}
-        />
-        <ItemCard
-          id={"2"}
-          itemName={"Pan-fried Yellow Croakers"}
-          itemPrice={"$15.90"}
-          url={
-            "https://www.putien.com/wp-content/uploads/2021/03/%E5%AE%B6%E5%B8%B8%E7%84%96%E7%AC%8B%E5%B9%B2.jpg"
-          }
-          onClick={handleItemCardOnClick}
-        />
-        <ItemCard
-          id={"3"}
-          itemName={"Pan-fried Yellow Croakers"}
-          itemPrice={"$15.90"}
-          url={
-            "https://www.putien.com/wp-content/uploads/2021/03/%E5%AE%B6%E5%B8%B8%E7%84%96%E7%AC%8B%E5%B9%B2.jpg"
-          }
-          onClick={handleItemCardOnClick}
-        />
-        <ItemCard
-          id={"4"}
-          itemName={"Pan-fried Yellow Croakers"}
-          itemPrice={"$15.90"}
-          url={
-            "https://www.putien.com/wp-content/uploads/2021/03/%E5%AE%B6%E5%B8%B8%E7%84%96%E7%AC%8B%E5%B9%B2.jpg"
-          }
-          onClick={handleItemCardOnClick}
-        />
-        <ItemCard
-          id={"5"}
-          itemName={"Pan-fried Yellow Croakers"}
-          itemPrice={"$15.90"}
-          url={
-            "https://www.putien.com/wp-content/uploads/2021/03/%E5%AE%B6%E5%B8%B8%E7%84%96%E7%AC%8B%E5%B9%B2.jpg"
-          }
-          onClick={handleItemCardOnClick}
-        />
+        {categoriesMap[selectedCat] &&
+          categoriesMap[selectedCat].dishes.map((id) => {
+            return (
+              <ItemCard
+                id={id}
+                itemName={dishsMap[id].name}
+                itemPrice={`$${dishsMap[id].price.toFixed(2)}`}
+                url={dishsMap[id].image}
+                onClick={handleItemCardOnClick}
+              />
+            );
+          })}
       </div>
     </div>
   );
