@@ -6,20 +6,18 @@ name: Deploy to Firebase Hosting on PR
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./food-app-web
     steps:
       - uses: actions/setup-node@v2
         with:
           node-version: "14"
       - run: yarn install
-        with:
-          entryPoint: "./food-app-web"
       - run: yarn build
-        with:
-          entryPoint: "./food-app-web"
       - uses: actions/checkout@v2
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          entryPoint: "./food-app-web"
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KG_FOOD }}"
           projectId: kg-food
