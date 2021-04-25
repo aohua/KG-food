@@ -1,0 +1,10 @@
+.container {
+  background-color: #35bbc4;
+  margin-bottom: 8px;
+  padding: 8px;
+}
+
+.orderInfo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}

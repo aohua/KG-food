@@ -1,4 +1,6 @@
 import React from "react";
+import { useHistory } from "react-router";
+import useLongPress from "hooks/useLongPress";
 import shopIcon from "./assets/shop_icon.png";
 import stopWatchIcon from "./assets/stop_watch_icon.png";
 import s from "./index.module.css";
@@ -10,8 +12,13 @@ type Props = {
 };
 
 function Header({ location, numOfStores, est }: Props) {
+  const history = useHistory();
+  const onLongPress = () => {
+    history.push("/admin");
+  };
+  const longPressEvent = useLongPress(onLongPress);
   return (
-    <div className={s.container}>
+    <div {...longPressEvent} className={s.container}>
       <div className={s.infoContainer}>
         <b>Deliver food to</b>
         <div className={s.numOfStores}>

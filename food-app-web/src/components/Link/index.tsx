@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import s from "./index.module.css";
 
 const Link: FC<{ className?: string }> = ({ children, className }) => {

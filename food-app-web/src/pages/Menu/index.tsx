@@ -40,7 +40,7 @@ function Menu() {
           itemName={"Pan-fried Yellow Croakers"}
           itemPrice={"$15.90"}
           url={
-            "https://www.putien.com/wp-content/uploads/2021/03/%E5%AE%B6%E5%B8%B8%E7%84%96%E7%AC%8B%E5%B9%B2.jpg"
+            "https://firebasestorage.googleapis.com/v0/b/kg-food.appspot.com/o/%E5%AE%B6%E5%B8%B8%E7%84%96%E7%AC%8B%E5%B9%B2.jpeg?alt=media&token=ec408d99-f8b5-4571-9e3e-f4a6e697f429"
           }
           onClick={handleItemCardOnClick}
         />
