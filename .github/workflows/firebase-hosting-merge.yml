@@ -17,5 +17,6 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_KG_FOOD }}'
           channelId: live
           projectId: kg-food
+          entryPoint: "./food-app-web" 
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
