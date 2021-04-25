@@ -6,10 +6,10 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - main
+defaults:
+  run:
+    working-directory: ./food-app-web
 jobs:
-  defaults:
-    run:
-      working-directory: ./food-app-web
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
