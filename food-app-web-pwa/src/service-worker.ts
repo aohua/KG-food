@@ -29,6 +29,14 @@ registerRoute(
   new RegExp('https://firebasestorage\\.googleapis\\.com/v0/b/kg-food\\.appspot\\.com/o/.*\\.jpeg\\?alt=media'),
   new CacheFirst({
     cacheName: 'image-cache',
+    plugins: [
+      new ExpirationPlugin({
+        // Only cache requests for a week
+        maxAgeSeconds: 1000 * 24 * 60 * 60,
+        // Only cache 10 requests.
+        maxEntries: 100,
+      }),
+    ]
   })
 );
 
