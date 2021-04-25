@@ -18,7 +18,7 @@ const AddDishForm = () => {
     });
     const id = lastId + 1;
     const dish = {
-      id: id + "",
+      id: id,
       name: name.trim(),
       price: Number(price.trim()),
       image: image.trim(),

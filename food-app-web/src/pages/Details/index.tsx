@@ -1,4 +1,7 @@
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+
+import useLocalStorage, { KEYS } from "hooks/useLocalStorage";
+import { Dish } from "context";
 
 import Header from "components/Header";
 import Paper from "components/Paper";
@@ -12,9 +15,17 @@ import s from "./index.module.css";
 
 function Details() {
   const history = useHistory();
+  let { foodId } = useParams<{ foodId: string }>();
+  const [dishs] = useLocalStorage<Dish[]>(KEYS.DISHS, []);
   const handleItemCardOnClick = (id: string) => {
     history.push(`/food/${id}`);
   };
+  const currentDish = dishs.find((dish) => {
+    return dish.id === Number(foodId);
+  });
+  if (!currentDish) {
+    return null;
+  }
   return (
     <div>
       <Header location="Blk 123 Eunos Ave 1 #12-123" numOfStores={2} est={40} />
@@ -26,11 +37,10 @@ function Details() {
       </Paper>
       <HorizontalCard
         dish={{
-          id: "1",
-          name: "Pan-fried Yellow Croakers",
-          price: 15.9,
-          image:
-            "https://www.putien.com/wp-content/uploads/2021/03/%E5%AE%B6%E5%B8%B8%E7%84%96%E7%AC%8B%E5%B9%B2.jpg",
+          id: currentDish.id,
+          name: currentDish.name,
+          price: currentDish.price,
+          image: currentDish.image,
         }}
       />
       <Title className={s.title}>Similar Food Items</Title>

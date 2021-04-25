@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-export type Dish = { id: string; name: string; price: number, image: string, ingredients?: string[], quantity?: number };
+export type Dish = { id: number; name: string; price: number, image: string, ingredients?: string[], quantity?: number };
 
 export type Order = {
   dishs: Dish[];

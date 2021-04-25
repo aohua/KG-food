@@ -10,10 +10,10 @@
 }
 
 .cart {
+  width: 100%;
   max-width: 460px;
   position: fixed;
   height: var(--cart-height);
-  width: 100%;
   color: #ffffff;
   background: #2c4c5c;
   bottom: 0;
@@ -24,12 +24,10 @@
 }
 
 .cartPanel {
-  max-width: 460px;
   position: fixed;
-  left: 0;
   bottom: var(--cart-height);
   width: 100%;
-  max-width: 100%;
+  max-width: 460px;
   transition: max-height 0.5s;
   max-height: 0px;
   background: #ffffff;

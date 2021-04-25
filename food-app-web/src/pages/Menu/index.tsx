@@ -65,6 +65,7 @@ function Menu() {
           categoriesMap[selectedCat].dishes.map((id) => {
             return (
               <ItemCard
+                key={id}
                 id={id}
                 itemName={dishsMap[id].name}
                 itemPrice={`$${dishsMap[id].price.toFixed(2)}`}
