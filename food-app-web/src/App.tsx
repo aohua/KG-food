@@ -26,7 +26,7 @@ function App() {
       >
         <Router>
           <Switch>
-            <Route path="/menu/:menuId">
+            <Route path="/menu">
               <Menu />
             </Route>
             <Route path="/food/:foodId">

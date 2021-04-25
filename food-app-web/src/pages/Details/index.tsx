@@ -21,7 +21,7 @@ function Details() {
       <Header location="Blk 123 Eunos Ave 1 #12-123" numOfStores={2} est={40} />
       <Paper>
         <Links>
-          <Link>Main</Link>
+          <Link to={"/menu"}>Main</Link>
           <Link>Putien</Link>
         </Links>
       </Paper>
