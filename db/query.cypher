@@ -13,3 +13,6 @@ ORDER BY n.name
 MATCH (n:Dish)
 RETURN n.id, n.name, n.dish, n.image
 ORDER BY n.name
+
+// remove all items 
+MATCH (n) DETACH DELETE n
