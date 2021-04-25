@@ -34,7 +34,7 @@ class Dish(Resource):
                 '''
                 MATCH (n:Dish) 
                 OPTIONAL MATCH (n)-[c:CONTAINS]->(m:Ingredient) 
-                RETURN ID(n), n.name, n.category, n.price, n.image, c.quantity, m.name
+                RETURN ID(n), n.name, n.category, n.price, n.image, c.quantity, ID(m), m.name
                 '''
             ))
         db = get_db()
@@ -49,7 +49,7 @@ class Dish(Resource):
                     serialise_dish.append(dish_record)
                 dish_record = {'id': record['ID(n)'], 'name':record['n.name'], 'category': record['n.category'], 'price': record['n.price'], 'image': record['n.image'], 'ingredients':[]}
             if record['m.name'] is not None:
-                ingredient = {'name': record['m.name'], 'gram': record['c.quantity']}
+                ingredient = {'id': record['ID(m)'], 'name': record['m.name'], 'gram': record['c.quantity']}
                 dish_record['ingredients'].append(ingredient)
         
         serialise_dish.append(dish_record) # last dish
@@ -67,19 +67,47 @@ class Category(Resource):
             ))
         db = get_db()
         result = db.read_transaction(get_categories)
+
         serialise_category = []
-        category_record = {'category':None}
+        category_record = {'category': None}
         for record in result:
             if category_record['category'] != record['n.category']:
                 if category_record['category'] is not None:
                     serialise_category.append(category_record)
-                category_record = {'category':record['n.category'], 'dishes':[]}
-            
-            dish = record['ID(n)']
+                category_record = {'category': record['n.category'], 'dishes':[]}
+        
+            dish = {'id': record['ID(n)'], 'name': record['n.name']}
             category_record['dishes'].append(dish)
         
-        serialise_category.append(category_record) # last category
+        serialise_category.append(category_record) # last dish
         return serialise_category
+
+class ComplementaryItems(Resource):
+    def get(self):
+        def get_complementary_dishes(tx):
+            return list(tx.run(
+                '''
+                MATCH (n:Dish)-[o:COMPLEMENTS]->(m:Dish)
+                RETURN ID(n), n.name, ID(m), m.name, o.count
+                ORDER BY n.name, o.count desc
+                '''
+            ))
+        db = get_db()
+        result = db.read_transaction(get_complementary_dishes)
+
+        serialise_complementary_dish = []
+        complementary_dish_record = {'id':-1}
+        for record in result:
+            if complementary_dish_record['id'] != record['ID(n)']:
+                if complementary_dish_record['id'] != -1:
+                    serialise_complementary_dish.append(complementary_dish_record)
+                complementary_dish_record = {'id': record['ID(n)'], 'name':record['n.name'],'complementary_dish':[]}
+        
+            complement = {'id': record['ID(m)'], 'name': record['m.name'], 'count': record['o.count']}
+            complementary_dish_record['complementary_dish'].append(complement)
+        
+        serialise_complementary_dish.append(complementary_dish_record) # last dish
+        return serialise_complementary_dish
 
 class IngredientDish(Resource):
     def get(self):
@@ -93,14 +121,20 @@ class IngredientDish(Resource):
             ))
         db = get_db()
         result = db.read_transaction(get_ingredient_dishes)
-        serialise_ingredient_dishes = {}
+
+        serialise_ingredient_dishes = []
+        ingredient_record = {'id':-1}
         for record in result:
-            if record['ID(n)'] not in serialise_ingredient_dishes:
-                serialise_ingredient_dishes[record['ID(n)']] = []
-            serialise_ingredient_dishes[record['ID(n)']].extend([record['ID(m)']])
-
+            if ingredient_record['id'] != record['ID(n)']:
+                if ingredient_record['id'] != -1:
+                    serialise_ingredient_dishes.append(ingredient_record)
+                ingredient_record = {'id': record['ID(n)'], 'name':record['n.name'],'dish':[]}
+        
+            dish = {'id': record['ID(m)'], 'name': record['m.name']}
+            ingredient_record['dish'].append(dish)
+        
+        serialise_ingredient_dishes.append(ingredient_record)
         return serialise_ingredient_dishes
-
 
 class SimilarItems(Resource):
     def get(self):
@@ -109,34 +143,41 @@ class SimilarItems(Resource):
                 '''
                 MATCH (n:Dish)-[:CONTAINS]->(m:Ingredient:Main)<-[:CONTAINS]-(o:Dish)
                 WHERE o <> n
-                RETURN ID(n), m.name, ID(o)
+                RETURN ID(n), n.name , ID(m), m.name, ID(o), o.name
                 ORDER BY n.name
                 '''
             ))
         db = get_db()
         result = db.read_transaction(get_similar_items)
-        similar_items = {}
+
+        serialise_similar_items = []
+        dish_record = {'id':-1}
         for record in result:
-            if record['ID(n)'] not in similar_items:
-                similar_items[record['ID(n)']] = []
-            similar_items[record['ID(n)']].extend([record['ID(o)']])
-
-        return similar_items
+            if dish_record['id'] != record['ID(n)']:
+                if dish_record['id'] != -1:
+                    serialise_similar_items.append(dish_record)
+                dish_record = {'id': record['ID(n)'], 'name':record['n.name'],'dish':[]}
         
+            dish = {'id': record['ID(o)'], 'name': record['o.name'], 'ingredient_id': record['ID(m)'], 'ingredient_name': record['m.name']}
+            dish_record['dish'].append(dish)
+        
+        serialise_similar_items.append(dish_record)
+        return serialise_similar_items
 
-# def serialise_dish(dish):
-#     return {
-#         'id': dish['ID(n)'],
-#         'name': dish['n.name'],
-#         'dish': dish['n.dish'], 
-#         'image': dish['n.image'],
-#         'price': dish['n.price']
-#     }
+        # similar_items = {}
+        # for record in result:
+        #     if record['ID(n)'] not in similar_items:
+        #         similar_items[record['ID(n)']] = []
+        #     similar_items[record['ID(n)']].extend([record['ID(o)']])
+
+        # return similar_items
+    
 
 api.add_resource(Dish, '/dish')
 api.add_resource(Category, '/category')
 api.add_resource(IngredientDish, '/ingredient_dish')
 api.add_resource(SimilarItems, '/similar_items')
+api.add_resource(ComplementaryItems, '/complementary_items')
 
 
 if __name__ == '__main__':
