@@ -1,0 +1,14 @@
+.container {
+}
+.itemName {
+  color: #2c4c5c;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+.itemPrice {
+  color: #2c4c5c;
+  font-size: 12px;
+  font-weight: normal;
+  margin-top: 4px;
+}
