@@ -11,7 +11,11 @@ jobs:
         with:
           node-version: "14"
       - run: yarn install
+        with:
+          entryPoint: "./food-app-web"
       - run: yarn build
+        with:
+          entryPoint: "./food-app-web"
       - uses: actions/checkout@v2
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
