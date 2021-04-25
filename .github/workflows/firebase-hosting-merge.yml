@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./food-app-web
+        working-directory: ./food-app-web/
     steps:
       - uses: actions/setup-node@v2
         with:
