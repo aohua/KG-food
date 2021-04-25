@@ -21,7 +21,7 @@ type Category = {
 function Menu() {
   const history = useHistory();
   const [selectedCat, setSelectedCat] = useState("Recommended");
-  const [dishs, setDishs] = useLocalStorage<Dish[]>(KEYS.DISHS, []);
+  const [dishs] = useLocalStorage<Dish[]>(KEYS.DISHS, []);
   const [categories] = useLocalStorage<Category[]>(KEYS.CATEGORIES, []);
   const handleItemCardOnClick = (id: string) => {
     history.push(`/food/${id}`);

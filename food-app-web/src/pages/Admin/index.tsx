@@ -11,8 +11,8 @@ const Admin = () => {
   const [showOrders, setShowOrders] = useState(true);
   const { orders } = useContext(GlobalContext);
   const history = useHistory();
-  const [dishs, setDishs] = useLocalStorage<Dish[]>(KEYS.DISHS, []);
-  const [categories, setCategories] = useLocalStorage(KEYS.CATEGORIES, []);
+  const [, setDishs] = useLocalStorage<Dish[]>(KEYS.DISHS, []);
+  const [, setCategories] = useLocalStorage(KEYS.CATEGORIES, []);
   return (
     <div>
       <Tab

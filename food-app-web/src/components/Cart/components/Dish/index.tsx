@@ -1,6 +1,5 @@
 import { Dish } from "context";
 import Button from "components/Button";
-import s from "./index.module.css";
 
 type Props = {
   dish: Dish;

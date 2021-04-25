@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { GlobalContext, Dish, Order } from "context";
 import useLocalStorage, { KEYS } from "hooks/useLocalStorage";
