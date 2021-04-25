@@ -26,7 +26,7 @@ clientsClaim();
 precacheAndRoute(self.__WB_MANIFEST);
 
 registerRoute(
-  ({request}) => request.destination === 'image',
+  new RegExp('https://firebasestorage\\.googleapis\\.com/v0/b/kg-food.appspot.com/o/.*\\.jpeg?alt=media'),
   new CacheFirst({
     cacheName: 'image-cache',
   })
