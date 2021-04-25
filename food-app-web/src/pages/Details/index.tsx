@@ -21,7 +21,7 @@ function Details() {
       <Header location="Blk 123 Eunos Ave 1 #12-123" numOfStores={2} est={40} />
       <Paper>
         <Links>
-          <Link>Main</Link>
+          <Link to={"/menu"}>Main</Link>
           <Link>Putien</Link>
         </Links>
       </Paper>
@@ -29,7 +29,7 @@ function Details() {
         dish={{
           id: "1",
           name: "Pan-fried Yellow Croakers",
-          price: "15.90",
+          price: 15.9,
           image:
             "https://www.putien.com/wp-content/uploads/2021/03/%E5%AE%B6%E5%B8%B8%E7%84%96%E7%AC%8B%E5%B9%B2.jpg",
         }}

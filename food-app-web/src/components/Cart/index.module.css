@@ -10,6 +10,7 @@
 }
 
 .cart {
+  max-width: 460px;
   position: fixed;
   height: var(--cart-height);
   width: 100%;
@@ -23,6 +24,7 @@
 }
 
 .cartPanel {
+  max-width: 460px;
   position: fixed;
   left: 0;
   bottom: var(--cart-height);

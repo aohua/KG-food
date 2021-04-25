@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useLocation } from "react-router";
 import { GlobalContext } from "context";
 import Dish from "./components/Dish";
 import s from "./index.module.css";
@@ -6,10 +7,14 @@ import s from "./index.module.css";
 const Cart = () => {
   const { cart, setCart, orders, setOrders } = useContext(GlobalContext);
   const [isActive, setIsActive] = useState(false);
+  const location = useLocation();
   const removeDish = (index: number) => {
     cart.splice(index, 1);
     setCart([...cart]);
   };
+  if (location.pathname === "/admin") {
+    return null;
+  }
   return (
     <>
       <div
@@ -57,8 +62,10 @@ const Cart = () => {
                 orders.push({
                   id: `${Date.now()}`,
                   customer: "aohua",
+                  phone: "81350000",
                   dateTime: date.toLocaleString(),
                   dishs: [...cart],
+                  table: 1,
                 });
                 setOrders([...orders]);
                 setCart([]);

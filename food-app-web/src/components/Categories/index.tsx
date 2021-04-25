@@ -4,9 +4,10 @@ import s from "./index.module.css";
 
 type Props = {
   categories: { name: string }[];
+  onSelect: (name: string) => void;
   className?: string;
 };
-const Categories = ({ categories, className }: Props) => {
+const Categories = ({ categories, className, onSelect }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   return (
     <div className={`${s.container} ${className}`}>
@@ -17,6 +18,7 @@ const Categories = ({ categories, className }: Props) => {
             name={categoty.name}
             isSelected={index === selectedIndex}
             onClick={() => {
+              onSelect(categoty.name);
               setSelectedIndex(index);
             }}
           />

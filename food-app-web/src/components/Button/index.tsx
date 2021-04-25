@@ -1,13 +1,15 @@
-import React, { FC } from "react";
+import { FC, CSSProperties } from "react";
 import s from "./index.module.css";
 
 type Props = {
-  onClick: (variables: any) => void;
+  type?: "submit" | "button";
+  onClick?: (variables: any) => void;
+  style?: CSSProperties;
 };
 
-const Button: FC<Props> = ({ children, onClick }) => {
+const Button: FC<Props> = ({ children, onClick, type = "button", ...rest }) => {
   return (
-    <button className={s.button} onClick={onClick}>
+    <button type={type} className={s.button} onClick={onClick} {...rest}>
       {children}
     </button>
   );
