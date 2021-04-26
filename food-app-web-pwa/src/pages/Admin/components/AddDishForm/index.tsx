@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import { Dish } from "context";
 import Button from "components/Button";
 import useLocalStorage, { KEYS } from "hooks/useLocalStorage";
-import { recommend } from "models/similarProduct";
+import { recommend, compare, tfidfVectorizer } from "models/similarProduct";
 import s from "./index.module.css";
 type SimilarItemsType = {
   id: number;
@@ -59,7 +59,7 @@ const AddDishForm = () => {
           gram: Number(weights[index]),
         };
       });
-    const dish = {
+    const dish: Dish = {
       id: id,
       name: name.trim(),
       price: Number(price.trim()),
@@ -73,10 +73,33 @@ const AddDishForm = () => {
     });
     sameCategory!!.dishes.push({ id: id + "", name: name.trim() });
     setCategories(categories);
+    const similarItems = recommend(id + "", updatedDishes);
     similarProducts.push({
       id,
       name,
-      dish: recommend(id + "", updatedDishes),
+      dish: similarItems,
+    });
+    similarItems.forEach((item) => {
+      const cur = similarProducts.find((p) => {
+        return p.id === Number(item.id);
+      });
+      cur?.dish.push({ id: id + "" });
+      cur?.dish.push({ id: cur.id + "" });
+      const dishes = cur?.dish.map(
+        ({ id }) => updatedDishes.find((dish) => dish.id === Number(id))!!
+      );
+      if (cur && dishes) {
+        const dishesWithTfidf = tfidfVectorizer(dishes);
+        dishes.forEach((dish) => {
+          dish.similarity = compare(cur.id + "", dish.id + "", dishesWithTfidf);
+        });
+        dishes.sort((a, b) => b.similarity!! - a.similarity!!);
+        dishes.shift();
+        cur.dish = dishes.map((dish) => ({
+          id: dish.id + "",
+        }));
+        console.log(dishes);
+      }
     });
     setSimilarProducts(similarProducts);
     setName("");
