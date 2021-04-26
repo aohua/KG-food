@@ -1,8 +1,9 @@
-from flask import Flask, g
+from flask import Flask, g, request
 from flask_restful import reqparse, abort, Api, Resource
 from flask_json import FlaskJSON, json_response
 from flask_cors import CORS
 from neo4j import GraphDatabase, basic_auth
+import pymongo
 
 # flask RESTful setup
 app = Flask(__name__)
@@ -11,7 +12,12 @@ api = Api(app)
 CORS(app)
 FlaskJSON(app)
 
-# db connection
+# mongo db connection
+client = pymongo.MongoClient("127.0.0.1:27017")
+mongodb = client['kg_food_orders']
+order_collection = mongodb['order']
+
+# neo4j db connection
 DATABASE_USERNAME = 'neo4j'
 DATABASE_PASSWORD = 'asdf'
 DATABASE_URL = 'bolt://localhost'
@@ -26,6 +32,18 @@ def get_db():
 def close_db(error):
     if hasattr(g, 'neo4j_db'):
         g.neo4j_db.close()
+
+
+# objects / APIs
+class Order(Resource):
+    def post(self): 
+        orders = request.get_json() # this will be in an array form 
+        result = order_collection.insert_many(orders) 
+
+        # TODO: loop through all orders and create complementary links on neo4j, refer to kg_food_complementary.cpyher for code
+
+
+        return {'status':'done', 'id': str(result)}
 
 class Dish(Resource):
     def get(self):
@@ -178,6 +196,7 @@ api.add_resource(Category, '/category')
 api.add_resource(IngredientDish, '/ingredient_dish')
 api.add_resource(SimilarItems, '/similar_items')
 api.add_resource(ComplementaryItems, '/complementary_items')
+api.add_resource(Order, '/order')
 
 
 if __name__ == '__main__':
