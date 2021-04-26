@@ -158,11 +158,17 @@ class SimilarItems(Resource):
     def get(self):
         def get_similar_items(tx):
             return list(tx.run(
+                # '''
+                # MATCH (n:Dish)-[:CONTAINS]->(m:Ingredient:Main)<-[:CONTAINS]-(o:Dish)
+                # WHERE o <> n
+                # RETURN ID(n), n.name , ID(m), m.name, ID(o), o.name
+                # ORDER BY n.name
+                # '''
                 '''
-                MATCH (n:Dish)-[:CONTAINS]->(m:Ingredient:Main)<-[:CONTAINS]-(o:Dish)
+                MATCH (n:Dish)-[p:CONTAINS]->(m:Ingredient)<-[:CONTAINS]-(o:Dish)
                 WHERE o <> n
-                RETURN ID(n), n.name , ID(m), m.name, ID(o), o.name
-                ORDER BY n.name
+                RETURN ID(n), n.name , ID(m), m.name, p.quantity, ID(o), o.name
+                ORDER BY n.name, p.quantity desc
                 '''
             ))
         db = get_db()
