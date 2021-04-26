@@ -27,7 +27,6 @@ const SimilarItems = () => {
   if (!currentDish) {
     return null;
   }
-  console.log("currentDish", currentDish, similarItems);
   const handleItemCardOnClick = (id: string) => {
     history.push(`/food/${id}`);
   };
