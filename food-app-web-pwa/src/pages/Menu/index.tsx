@@ -9,19 +9,19 @@ import Categories from "components/Categories";
 import ItemCard from "components/ItemCard";
 
 import useLocalStorage, { KEYS } from "hooks/useLocalStorage";
+import useDishesMap from "hooks/useDishesMap";
 
 import s from "./index.module.css";
-import { Dish } from "context";
 
 type Category = {
   category: string;
-  dishes: string[];
+  dishes: { id: string; name: string }[];
 };
 
 function Menu() {
   const history = useHistory();
   const [selectedCat, setSelectedCat] = useState("Recommended");
-  const [dishs] = useLocalStorage<Dish[]>(KEYS.DISHS, []);
+  const dishesMap = useDishesMap();
   const [categories] = useLocalStorage<Category[]>(KEYS.CATEGORIES, []);
   const handleItemCardOnClick = (id: string) => {
     history.push(`/food/${id}`);
@@ -33,13 +33,6 @@ function Menu() {
     });
     return categoriesMap;
   }, [categories]);
-  const dishsMap = React.useMemo(() => {
-    const dishsMap: { [key: string]: Dish } = {};
-    dishs.forEach((dish) => {
-      dishsMap[dish.id] = dish;
-    });
-    return dishsMap;
-  }, [dishs]);
   return (
     <div>
       <Header location="Blk 123 Eunos Ave 1 #12-123" numOfStores={2} est={40} />
@@ -62,14 +55,14 @@ function Menu() {
       </Paper>
       <div className={s.itemCardContainer}>
         {categoriesMap[selectedCat] &&
-          categoriesMap[selectedCat].dishes.map((id) => {
+          categoriesMap[selectedCat].dishes.map(({ id }) => {
             return (
               <ItemCard
                 key={id}
                 id={id}
-                itemName={dishsMap[id].name}
-                itemPrice={`$${dishsMap[id].price.toFixed(2)}`}
-                url={dishsMap[id].image}
+                itemName={dishesMap[id].name}
+                itemPrice={`$${dishesMap[id].price.toFixed(2)}`}
+                url={dishesMap[id].image}
                 onClick={handleItemCardOnClick}
               />
             );

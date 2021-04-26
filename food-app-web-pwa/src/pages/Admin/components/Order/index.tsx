@@ -10,7 +10,7 @@ const Order = ({ order }: { order: OrderType }) => {
         <div style={{ textAlign: "right" }}>Table {order.table}</div>
       </div>
       <ul>
-        {order.dishs.map((dish) => {
+        {order.dishes.map((dish) => {
           return (
             <li>
               {dish.name} X {dish.quantity}

@@ -68,7 +68,7 @@ const Cart = () => {
                   customer: customer,
                   phone: phone,
                   dateTime: date.toLocaleString(),
-                  dishs: [...cart],
+                  dishes: [...cart],
                   table,
                 });
                 setOrders([...orders]);

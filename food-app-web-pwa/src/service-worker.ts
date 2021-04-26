@@ -258,6 +258,10 @@ precacheAndRoute([
     url:
       "https://firebasestorage.googleapis.com/v0/b/kg-food.appspot.com/o/黄金荷叶包-1.jpeg?alt=media",
   },
+  {
+    url:
+      "https://firebasestorage.googleapis.com/v0/b/kg-food.appspot.com/o/newDish.png?alt=media",
+  },
 ]);
 
 registerRoute(

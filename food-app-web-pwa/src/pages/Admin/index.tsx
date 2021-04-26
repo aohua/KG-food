@@ -11,8 +11,9 @@ const Admin = () => {
   const [showOrders, setShowOrders] = useState(true);
   const { orders } = useContext(GlobalContext);
   const history = useHistory();
-  const [, setDishs] = useLocalStorage<Dish[]>(KEYS.DISHS, []);
+  const [, setDishes] = useLocalStorage<Dish[]>(KEYS.DISHES, []);
   const [, setCategories] = useLocalStorage(KEYS.CATEGORIES, []);
+  const [, setSimilarItems] = useLocalStorage(KEYS.SIMILAR_ITEMS, {});
   return (
     <div>
       <Tab
@@ -46,16 +47,22 @@ const Admin = () => {
           <Button
             style={{ marginTop: 8 }}
             onClick={async () => {
-              // update dishs
+              // update dishes
               const dishResponse = await fetch("http://127.0.0.1:5000/dish");
-              const dishsFromApi = await dishResponse.json();
-              setDishs(dishsFromApi);
+              const dishesFromApi = await dishResponse.json();
+              setDishes(dishesFromApi);
               // update categories
               const categoriesResponse = await fetch(
                 "http://127.0.0.1:5000/category"
               );
               const categoriesFromApi = await categoriesResponse.json();
               setCategories(categoriesFromApi);
+              // update similar items
+              const similarResponse = await fetch(
+                "http://127.0.0.1:5000/similar_items"
+              );
+              const similarFromApi = await similarResponse.json();
+              setSimilarItems(similarFromApi);
             }}
           >
             Sync Menu

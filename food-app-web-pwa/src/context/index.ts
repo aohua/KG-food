@@ -5,12 +5,12 @@ export type Dish = {
   name: string;
   price: number;
   image: string;
-  ingredients?: string[];
+  ingredients?: { id?: number; name: string; gram: number }[];
   quantity?: number;
 };
 
 export type Order = {
-  dishs: Dish[];
+  dishes: Dish[];
   id: string;
   customer: string;
   phone: string;

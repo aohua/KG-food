@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 export const KEYS = {
-  DISHS: "dishs",
+  DISHES: "dishes",
   ORDERS: "orders",
   CART: "cart",
   CATEGORIES: "categories",
   CUSTOMER_NAME: "customer_name",
   PHONE: "phone",
   TABLE: "table",
+  SIMILAR_ITEMS: "similar_items",
 };
 
 function useLocalStorage<T>(
