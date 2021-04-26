@@ -21,7 +21,9 @@ const DishElm = ({ dish, removeDish }: Props) => {
         src={dish.image}
         alt={dish.name}
       />
-      <div style={{ marginRight: 4, maxWidth: "calc(100% - 120px)" }}>
+      <div
+        style={{ marginRight: 4, maxWidth: "calc(100% - 120px)", flexGrow: 1 }}
+      >
         <div style={{ fontWeight: 500, display: "flex" }}>
           <div
             style={{

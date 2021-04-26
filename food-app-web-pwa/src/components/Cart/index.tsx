@@ -3,11 +3,15 @@ import { useLocation } from "react-router";
 import { GlobalContext } from "context";
 import Dish from "./components/Dish";
 import s from "./index.module.css";
+import useLocalStorage, { KEYS } from "hooks/useLocalStorage";
 
 const Cart = () => {
   const { cart, setCart, orders, setOrders } = useContext(GlobalContext);
   const [isActive, setIsActive] = useState(false);
   const location = useLocation();
+  const [customer] = useLocalStorage(KEYS.CUSTOMER_NAME, "");
+  const [phone] = useLocalStorage(KEYS.PHONE, "");
+  const [table] = useLocalStorage(KEYS.TABLE, "");
   const removeDish = (index: number) => {
     cart.splice(index, 1);
     setCart([...cart]);
@@ -61,11 +65,11 @@ const Cart = () => {
                 const date = new Date();
                 orders.push({
                   id: `${Date.now()}`,
-                  customer: "aohua",
-                  phone: "81350000",
+                  customer: customer,
+                  phone: phone,
                   dateTime: date.toLocaleString(),
                   dishs: [...cart],
-                  table: 1,
+                  table,
                 });
                 setOrders([...orders]);
                 setCart([]);

@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #35bbc4;
+  height: 100vh;
+}
+.input {
+  width: 60%;
+  margin-top: 8px;
+}

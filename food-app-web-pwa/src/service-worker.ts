@@ -13,7 +13,7 @@ import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 import { StaleWhileRevalidate } from "workbox-strategies";
-// import { CacheFirst } from "workbox-strategies";
+import { CacheFirst } from "workbox-strategies";
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -260,19 +260,19 @@ precacheAndRoute([
   },
 ]);
 
-// registerRoute(
-//   new RegExp(
-//     "https://firebasestorage\\.googleapis\\.com/v0/b/kg-food\\.appspot\\.com/o/.*\\.jpeg\\?alt=media"
-//   ),
-//   new CacheFirst({
-//     cacheName: "image-cache",
-//     plugins: [
-//       new ExpirationPlugin({
-//         maxAgeSeconds: 1000 * 24 * 60 * 60,
-//       }),
-//     ],
-//   })
-// );
+registerRoute(
+  new RegExp(
+    "https://firebasestorage\\.googleapis\\.com/v0/b/kg-food\\.appspot\\.com/o/.*\\.jpeg\\?alt=media"
+  ),
+  new CacheFirst({
+    cacheName: "image-cache",
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 1000 * 24 * 60 * 60,
+      }),
+    ],
+  })
+);
 
 // Set up App Shell-style routing, so that all navigation requests
 // are fulfilled with your index.html shell. Learn more at

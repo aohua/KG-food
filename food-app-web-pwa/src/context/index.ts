@@ -1,6 +1,13 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
-export type Dish = { id: number; name: string; price: number, image: string, ingredients?: string[], quantity?: number };
+export type Dish = {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  ingredients?: string[];
+  quantity?: number;
+};
 
 export type Order = {
   dishs: Dish[];
@@ -8,7 +15,7 @@ export type Order = {
   customer: string;
   phone: string;
   dateTime: string;
-  table: number;
+  table: string;
 };
 
 export const GlobalContext = createContext<{
