@@ -98,7 +98,6 @@ const AddDishForm = () => {
         cur.dish = dishes.map((dish) => ({
           id: dish.id + "",
         }));
-        console.log(dishes);
       }
     });
     setSimilarProducts(similarProducts);
