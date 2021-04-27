@@ -65,6 +65,7 @@ const AddDishForm = () => {
       price: Number(price.trim()),
       image: image.trim(),
       ingredients: ingredientsObjs,
+      category: categoryName,
     };
     // add to dishes
     const updatedDishes = [...dishes, dish];
@@ -110,6 +111,7 @@ const AddDishForm = () => {
     setImage("");
     setIngredients("");
     setIngredientsWeight("");
+    window.location.reload();
   };
   return (
     <form onSubmit={onSubmit}>

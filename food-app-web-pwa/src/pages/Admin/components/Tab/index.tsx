@@ -9,15 +9,6 @@ const Tab = ({ onOrderClick, onAdminClick }: Props) => {
   return (
     <div className={s.tabContainer}>
       <div
-        className={`${s.tab} ${active === "orders" ? s.active : ""}`}
-        onClick={() => {
-          setActive("orders");
-          onOrderClick();
-        }}
-      >
-        Orders
-      </div>
-      <div
         className={`${s.tab} ${active === "admin" ? s.active : ""}`}
         onClick={() => {
           setActive("admin");
@@ -25,6 +16,15 @@ const Tab = ({ onOrderClick, onAdminClick }: Props) => {
         }}
       >
         Admin
+      </div>
+      <div
+        className={`${s.tab} ${active === "orders" ? s.active : ""}`}
+        onClick={() => {
+          setActive("orders");
+          onOrderClick();
+        }}
+      >
+        Orders
       </div>
     </div>
   );

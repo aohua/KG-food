@@ -8,6 +8,7 @@ export type Dish = {
   ingredients?: { id?: number; name: string; gram: number }[];
   quantity?: number;
   similarity?: number;
+  category?: string;
 };
 
 export type Order = {

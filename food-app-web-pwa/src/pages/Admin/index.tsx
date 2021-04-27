@@ -8,10 +8,10 @@ import AddDishForm from "./components/AddDishForm";
 import s from "./index.module.css";
 import Button from "components/Button";
 const Admin = () => {
-  const [showOrders, setShowOrders] = useState(true);
+  const [showOrders, setShowOrders] = useState(false);
   const { orders } = useContext(GlobalContext);
   const history = useHistory();
-  const [, setDishes] = useLocalStorage<Dish[]>(KEYS.DISHES, []);
+  const [dishes, setDishes] = useLocalStorage<Dish[]>(KEYS.DISHES, []);
   const [, setCategories] = useLocalStorage(KEYS.CATEGORIES, []);
   const [, setSimilarItems] = useLocalStorage(KEYS.SIMILAR_ITEMS, {});
   const [, setComplementaryItems] = useLocalStorage(
@@ -49,7 +49,6 @@ const Admin = () => {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
-                  // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: JSON.stringify(orders),
               });
@@ -57,6 +56,21 @@ const Admin = () => {
             }}
           >
             Upload Order
+          </Button>
+          <Button
+            style={{ marginTop: 8 }}
+            onClick={() => {
+              // TODO: upload orders
+              fetch("http://127.0.0.1:5000/dish", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dishes),
+              });
+            }}
+          >
+            Upload Dishes
           </Button>
           <Button
             style={{ marginTop: 8 }}
