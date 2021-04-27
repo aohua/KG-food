@@ -66,13 +66,16 @@ const AddDishForm = () => {
       image: image.trim(),
       ingredients: ingredientsObjs,
     };
+    // add to dishes
     const updatedDishes = [...dishes, dish];
     setDishes(updatedDishes);
+    // add to category
     const sameCategory = categories.find((category) => {
       return category.category === categoryName;
     });
     sameCategory!!.dishes.push({ id: id + "", name: name.trim() });
     setCategories(categories);
+    // generate similar dishes
     const similarItems = recommend(id + "", updatedDishes);
     similarProducts.push({
       id,

@@ -12,7 +12,7 @@ const Order = ({ order }: { order: OrderType }) => {
       <ul>
         {order.dishes.map((dish) => {
           return (
-            <li>
+            <li key={dish.id}>
               {dish.name} X {dish.quantity}
             </li>
           );

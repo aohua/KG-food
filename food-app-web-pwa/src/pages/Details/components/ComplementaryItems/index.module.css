@@ -1,0 +1,9 @@
+.itemCardContainer {
+  display: grid;
+  padding: 0 16px 16px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px 16px;
+}
+.title {
+  padding: 16px;
+}

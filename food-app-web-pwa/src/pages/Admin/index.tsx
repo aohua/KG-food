@@ -14,6 +14,10 @@ const Admin = () => {
   const [, setDishes] = useLocalStorage<Dish[]>(KEYS.DISHES, []);
   const [, setCategories] = useLocalStorage(KEYS.CATEGORIES, []);
   const [, setSimilarItems] = useLocalStorage(KEYS.SIMILAR_ITEMS, {});
+  const [, setComplementaryItems] = useLocalStorage(
+    KEYS.COMPLEMENTARY_ITEMS,
+    []
+  );
   return (
     <div>
       <Tab
@@ -31,7 +35,7 @@ const Admin = () => {
       {showOrders && (
         <div className={s.container}>
           {orders.map((order) => {
-            return <Order order={order} />;
+            return <Order key={order.id} order={order} />;
           })}
         </div>
       )}
@@ -40,6 +44,15 @@ const Admin = () => {
           <Button
             onClick={() => {
               // TODO: upload orders
+              fetch("http://127.0.0.1:5000/order", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify(orders),
+              });
+              console.log("Order uploaded");
             }}
           >
             Upload Order
@@ -63,6 +76,12 @@ const Admin = () => {
               );
               const similarFromApi = await similarResponse.json();
               setSimilarItems(similarFromApi);
+              // update complementary items
+              const complementaryResponse = await fetch(
+                "http://127.0.0.1:5000/complementary_items"
+              );
+              const complementaryFromApi = await complementaryResponse.json();
+              setComplementaryItems(complementaryFromApi);
             }}
           >
             Sync Menu

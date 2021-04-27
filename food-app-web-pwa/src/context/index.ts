@@ -12,6 +12,7 @@ export type Dish = {
 
 export type Order = {
   dishes: Dish[];
+  _id?: string; // for mongo db
   id: string;
   customer: string;
   phone: string;

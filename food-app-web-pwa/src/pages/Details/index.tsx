@@ -1,7 +1,8 @@
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import useLocalStorage, { KEYS } from "hooks/useLocalStorage";
-import { Dish } from "context";
+import { GlobalContext, Dish } from "context";
 
 import Header from "components/Header";
 import Paper from "components/Paper";
@@ -10,10 +11,15 @@ import Link from "components/Link";
 import HorizontalCard from "components/HorizontalCard";
 
 import SimilarItems from "./components/SimilarItems";
+import ComplementaryItems from "./components/ComplementaryItems";
 
 function Details() {
+  const { cart } = useContext(GlobalContext);
   let { foodId } = useParams<{ foodId: string }>();
   const [dishes] = useLocalStorage<Dish[]>(KEYS.DISHES, []);
+  const shouldShowComplementary = cart.some(
+    (dish) => dish.id === Number(foodId)
+  );
   const currentDish = dishes.find((dish) => {
     return dish.id === Number(foodId);
   });
@@ -37,7 +43,7 @@ function Details() {
           image: currentDish.image,
         }}
       />
-      <SimilarItems />
+      {shouldShowComplementary ? <ComplementaryItems /> : <SimilarItems />}
     </div>
   );
 }

@@ -63,8 +63,10 @@ const Cart = () => {
               onClick={(e) => {
                 e.stopPropagation();
                 const date = new Date();
+                const id = `${Date.now()}`;
                 orders.push({
-                  id: `${Date.now()}`,
+                  id,
+                  _id: id,
                   customer: customer,
                   phone: phone,
                   dateTime: date.toLocaleString(),

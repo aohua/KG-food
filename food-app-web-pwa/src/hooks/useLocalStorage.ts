@@ -9,6 +9,7 @@ export const KEYS = {
   PHONE: "phone",
   TABLE: "table",
   SIMILAR_ITEMS: "similar_items",
+  COMPLEMENTARY_ITEMS: "complementary_items",
 };
 
 function useLocalStorage<T>(

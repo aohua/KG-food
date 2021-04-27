@@ -38,7 +38,7 @@ def close_db(error):
 class Order(Resource):
     def post(self): 
         orders = request.get_json() # this will be in an array form 
-        result = order_collection.insert_many(orders) 
+        result = order_collection.insert_many(orders, False) 
 
         # TODO: loop through all orders and create complementary links on neo4j, refer to kg_food_complementary.cpyher for code
 
