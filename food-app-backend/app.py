@@ -54,6 +54,17 @@ class Order(Resource):
                 ON MATCH SET r.count = r.count + 1
                 RETURN r.count
                 ''', idl=idl, idr=idr)
+
+        def increase_dish_count(tx, id):
+            tx.run(
+                '''
+                MATCH (n:Dish) 
+                WHERE ID(n) = $id 
+                SET n.count = n.count + 1 
+                RETURN n
+                '''
+            , id=id)
+
         for order in orders:
             orderFromDB = order_collection.find_one({"_id": order["id"]})
             if orderFromDB is None:
@@ -63,6 +74,12 @@ class Order(Resource):
                 for i in range(len(order["dishes"]) - 1):
                     result = db.write_transaction(
                         add_complements, order["dishes"][i]["id"], order["dishes"][i+1]["id"])
+
+                    result = db.write_transaction(
+                        increase_dish_count, order["dishes"][i]["id"])
+
+                result = db.write_transaction(
+                        increase_dish_count, order["dishes"][len(order['dishes']) -1]["id"])
         return {'status': 'done'}
 
 
