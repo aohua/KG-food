@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import { Dish } from "context";
 import Header from "components/Header";
 import Paper from "components/Paper";
 import Links from "components/Links";
@@ -15,7 +16,7 @@ import s from "./index.module.css";
 
 type Category = {
   category: string;
-  dishes: { id: string; name: string }[];
+  dishes: Dish[];
 };
 
 function Menu() {
@@ -23,6 +24,7 @@ function Menu() {
   const [selectedCat, setSelectedCat] = useState("Recommended");
   const dishesMap = useDishesMap();
   const [categories] = useLocalStorage<Category[]>(KEYS.CATEGORIES, []);
+  const [recommendItems] = useLocalStorage<Dish[]>(KEYS.RECOMMEND, []);
   const handleItemCardOnClick = (id: string) => {
     history.push(`/food/${id}`);
   };
@@ -31,8 +33,12 @@ function Menu() {
     categories.forEach((category) => {
       categoriesMap[category.category] = category;
     });
+    categoriesMap["Recommended"] = {
+      category: "Recommended",
+      dishes: recommendItems,
+    };
     return categoriesMap;
-  }, [categories]);
+  }, [categories, recommendItems]);
   return (
     <div>
       <Header outlet="Parkway Parade" />
@@ -59,7 +65,7 @@ function Menu() {
             return (
               <ItemCard
                 key={id}
-                id={id}
+                id={id + ""}
                 itemName={dishesMap[id].name}
                 itemPrice={`$${dishesMap[id].price.toFixed(2)}`}
                 url={dishesMap[id].image}

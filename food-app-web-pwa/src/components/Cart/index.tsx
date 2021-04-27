@@ -94,19 +94,16 @@ const Cart = () => {
                   );
                   if (link) {
                     link.count++;
-                    dish1Complementary?.complementary_dish.sort(
-                      (a, b) => b.count - a.count
-                    );
                   } else {
                     dish1Complementary?.complementary_dish.push({
                       id: cart[i + 1].id,
                       name: cart[i + 1].name,
                       count: 1,
                     });
-                    dish1Complementary?.complementary_dish.sort(
-                      (a, b) => b.count - a.count
-                    );
                   }
+                  dish1Complementary?.complementary_dish.sort(
+                    (a, b) => b.count - a.count
+                  );
                 }
                 setComplementaryItems(complementaryItems);
                 setOrders([...orders]);

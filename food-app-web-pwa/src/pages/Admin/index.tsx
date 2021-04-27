@@ -18,6 +18,7 @@ const Admin = () => {
     KEYS.COMPLEMENTARY_ITEMS,
     []
   );
+  const [, setRecommendItems] = useLocalStorage(KEYS.RECOMMEND, []);
   return (
     <div>
       <Tab
@@ -82,6 +83,12 @@ const Admin = () => {
               );
               const complementaryFromApi = await complementaryResponse.json();
               setComplementaryItems(complementaryFromApi);
+              // update recommended
+              const recommendResponse = await fetch(
+                "http://127.0.0.1:5000/recommendation"
+              );
+              const recommendFromApi = await recommendResponse.json();
+              setRecommendItems(recommendFromApi);
             }}
           >
             Sync Menu

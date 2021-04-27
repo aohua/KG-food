@@ -10,6 +10,7 @@ export const KEYS = {
   TABLE: "table",
   SIMILAR_ITEMS: "similar_items",
   COMPLEMENTARY_ITEMS: "complementary_items",
+  RECOMMEND: "recommend",
 };
 
 function useLocalStorage<T>(
