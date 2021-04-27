@@ -44,15 +44,16 @@ class Order(Resource):
     def post(self):
         orders = request.get_json()  # this will be in an array form
 
-        def add_complements(tx, namel, namer):
+        def add_complements(tx, idl, idr):
             tx.run(
                 '''
-                MATCH (n:Dish {name: $namel}),(m:Dish {name: $namer})
+                MATCH (n:Dish),(m:Dish)
+                WHERE ID(n) = $idl and ID(m) = $idr
                 MERGE (n)-[r:COMPLEMENTS]->(m)
                 ON CREATE SET r.count = 1
                 ON MATCH SET r.count = r.count + 1
                 RETURN r.count
-                ''', namel=namel, namer=namer)
+                ''', idl=idl, idr=idr)
         for order in orders:
             orderFromDB = order_collection.find_one({"_id": order["id"]})
             if orderFromDB is None:
@@ -61,7 +62,7 @@ class Order(Resource):
                 db = get_db()
                 for i in range(len(order["dishes"]) - 1):
                     result = db.write_transaction(
-                        add_complements, order["dishes"][i]["name"], order["dishes"][i+1]["name"])
+                        add_complements, order["dishes"][i]["id"], order["dishes"][i+1]["id"])
         return {'status': 'done'}
 
 
