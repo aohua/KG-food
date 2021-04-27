@@ -4,6 +4,7 @@ from flask_json import FlaskJSON, json_response
 from flask_cors import CORS
 from neo4j import GraphDatabase, basic_auth
 import pymongo
+import json
 
 # flask RESTful setup
 app = Flask(__name__)
@@ -21,29 +22,48 @@ order_collection = mongodb['order']
 DATABASE_USERNAME = 'neo4j'
 DATABASE_PASSWORD = 'asdf'
 DATABASE_URL = 'bolt://localhost'
-driver = GraphDatabase.driver(DATABASE_URL, auth=basic_auth(DATABASE_USERNAME, str(DATABASE_PASSWORD)))
+driver = GraphDatabase.driver(DATABASE_URL, auth=basic_auth(
+    DATABASE_USERNAME, str(DATABASE_PASSWORD)))
+
 
 def get_db():
     if not hasattr(g, 'neo4j_db'):
         g.neo4j_db = driver.session()
     return g.neo4j_db
 
+
 @app.teardown_appcontext
 def close_db(error):
     if hasattr(g, 'neo4j_db'):
         g.neo4j_db.close()
 
-
 # objects / APIs
+
+
 class Order(Resource):
-    def post(self): 
-        orders = request.get_json() # this will be in an array form 
-        result = order_collection.insert_many(orders, False) 
+    def post(self):
+        orders = request.get_json()  # this will be in an array form
 
-        # TODO: loop through all orders and create complementary links on neo4j, refer to kg_food_complementary.cpyher for code
+        def add_complements(tx, namel, namer):
+            tx.run(
+                '''
+                MATCH (n:Dish {name: $namel}),(m:Dish {name: $namer})
+                MERGE (n)-[r:COMPLEMENTS]->(m)
+                ON CREATE SET r.count = 1
+                ON MATCH SET r.count = r.count + 1
+                RETURN r.count
+                ''', namel=namel, namer=namer)
+        for order in orders:
+            orderFromDB = order_collection.find_one({"_id": order["id"]})
+            if orderFromDB is None:
+                order_collection.insert_one(order)
+                # create new relationship or increase count
+                db = get_db()
+                for i in range(len(order["dishes"]) - 1):
+                    result = db.write_transaction(
+                        add_complements, order["dishes"][i]["name"], order["dishes"][i+1]["name"])
+        return {'status': 'done'}
 
-
-        return {'status':'done', 'id': str(result)}
 
 class Dish(Resource):
     def get(self):
@@ -60,17 +80,19 @@ class Dish(Resource):
         print(result[0])
         # return [serialise_dish(record) for record in result]
         serialise_dish = []
-        dish_record = {'id':-1}
+        dish_record = {'id': -1}
         for record in result:
             if dish_record['id'] != record['ID(n)']:
                 if dish_record['id'] != -1:
                     serialise_dish.append(dish_record)
-                dish_record = {'id': record['ID(n)'], 'name':record['n.name'], 'category': record['n.category'], 'price': record['n.price'], 'image': record['n.image'], 'ingredients':[]}
+                dish_record = {'id': record['ID(n)'], 'name': record['n.name'], 'category': record['n.category'],
+                               'price': record['n.price'], 'image': record['n.image'], 'ingredients': []}
             if record['m.name'] is not None:
-                ingredient = {'id': record['ID(m)'], 'name': record['m.name'], 'gram': record['c.quantity']}
+                ingredient = {
+                    'id': record['ID(m)'], 'name': record['m.name'], 'gram': record['c.quantity']}
                 dish_record['ingredients'].append(ingredient)
-        
-        serialise_dish.append(dish_record) # last dish
+
+        serialise_dish.append(dish_record)  # last dish
         return serialise_dish
 
 
@@ -92,13 +114,15 @@ class Category(Resource):
             if category_record['category'] != record['n.category']:
                 if category_record['category'] is not None:
                     serialise_category.append(category_record)
-                category_record = {'category': record['n.category'], 'dishes':[]}
-        
+                category_record = {
+                    'category': record['n.category'], 'dishes': []}
+
             dish = {'id': record['ID(n)'], 'name': record['n.name']}
             category_record['dishes'].append(dish)
-        
-        serialise_category.append(category_record) # last dish
+
+        serialise_category.append(category_record)  # last dish
         return serialise_category
+
 
 class ComplementaryItems(Resource):
     def get(self):
@@ -114,18 +138,25 @@ class ComplementaryItems(Resource):
         result = db.read_transaction(get_complementary_dishes)
 
         serialise_complementary_dish = []
-        complementary_dish_record = {'id':-1}
+        complementary_dish_record = {'id': -1}
         for record in result:
             if complementary_dish_record['id'] != record['ID(n)']:
                 if complementary_dish_record['id'] != -1:
-                    serialise_complementary_dish.append(complementary_dish_record)
-                complementary_dish_record = {'id': record['ID(n)'], 'name':record['n.name'],'complementary_dish':[]}
-        
-            complement = {'id': record['ID(m)'], 'name': record['m.name'], 'count': record['o.count']}
-            complementary_dish_record['complementary_dish'].append(complement)
-        
-        serialise_complementary_dish.append(complementary_dish_record) # last dish
+                    serialise_complementary_dish.append(
+                        complementary_dish_record)
+                complementary_dish_record = {
+                    'id': record['ID(n)'], 'name': record['n.name'], 'complementary_dish': []}
+
+            complement = {
+                'id': record['ID(m)'], 'name': record['m.name'], 'count': record['o.count']}
+            if len(complementary_dish_record['complementary_dish']) < 6:
+                complementary_dish_record['complementary_dish'].append(
+                    complement)
+
+        serialise_complementary_dish.append(
+            complementary_dish_record)  # last dish
         return serialise_complementary_dish
+
 
 class IngredientDish(Resource):
     def get(self):
@@ -141,18 +172,20 @@ class IngredientDish(Resource):
         result = db.read_transaction(get_ingredient_dishes)
 
         serialise_ingredient_dishes = []
-        ingredient_record = {'id':-1}
+        ingredient_record = {'id': -1}
         for record in result:
             if ingredient_record['id'] != record['ID(n)']:
                 if ingredient_record['id'] != -1:
                     serialise_ingredient_dishes.append(ingredient_record)
-                ingredient_record = {'id': record['ID(n)'], 'name':record['n.name'],'dish':[]}
-        
+                ingredient_record = {
+                    'id': record['ID(n)'], 'name': record['n.name'], 'dish': []}
+
             dish = {'id': record['ID(m)'], 'name': record['m.name']}
             ingredient_record['dish'].append(dish)
-        
+
         serialise_ingredient_dishes.append(ingredient_record)
         return serialise_ingredient_dishes
+
 
 class SimilarItems(Resource):
     def get(self):
@@ -175,16 +208,18 @@ class SimilarItems(Resource):
         result = db.read_transaction(get_similar_items)
 
         serialise_similar_items = []
-        dish_record = {'id':-1}
+        dish_record = {'id': -1}
         for record in result:
             if dish_record['id'] != record['ID(n)']:
                 if dish_record['id'] != -1:
                     serialise_similar_items.append(dish_record)
-                dish_record = {'id': record['ID(n)'], 'name':record['n.name'],'dish':[]}
-        
-            dish = {'id': record['ID(o)'], 'name': record['o.name'], 'ingredient_id': record['ID(m)'], 'ingredient_name': record['m.name']}
+                dish_record = {
+                    'id': record['ID(n)'], 'name': record['n.name'], 'dish': []}
+
+            dish = {'id': record['ID(o)'], 'name': record['o.name'],
+                    'ingredient_id': record['ID(m)'], 'ingredient_name': record['m.name']}
             dish_record['dish'].append(dish)
-        
+
         serialise_similar_items.append(dish_record)
         return serialise_similar_items
 
@@ -195,7 +230,7 @@ class SimilarItems(Resource):
         #     similar_items[record['ID(n)']].extend([record['ID(o)']])
 
         # return similar_items
-    
+
 
 api.add_resource(Dish, '/dish')
 api.add_resource(Category, '/category')
