@@ -28,7 +28,7 @@ function Details() {
   }
   return (
     <div>
-      <Header location="Blk 123 Eunos Ave 1 #12-123" numOfStores={2} est={40} />
+      <Header outlet="Parkway Parade" />
       <Paper>
         <Links>
           <Link to={"/menu"}>Main</Link>

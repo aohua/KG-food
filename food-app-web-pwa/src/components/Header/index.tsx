@@ -1,38 +1,29 @@
-import React from "react";
 import { useHistory } from "react-router";
 import useLongPress from "hooks/useLongPress";
-import shopIcon from "./assets/shop_icon.png";
-import stopWatchIcon from "./assets/stop_watch_icon.png";
 import s from "./index.module.css";
+import useLocalStorage, { KEYS } from "hooks/useLocalStorage";
 
 type Props = {
-  location: string;
-  numOfStores: number;
-  est: number;
+  outlet: string;
 };
 
-function Header({ location, numOfStores, est }: Props) {
+function Header({ outlet }: Props) {
   const history = useHistory();
   const onLongPress = () => {
     history.push("/admin");
   };
+  const [table] = useLocalStorage(KEYS.TABLE, 1);
   const longPressEvent = useLongPress(onLongPress);
   return (
     <div {...longPressEvent} className={s.container}>
       <div className={s.infoContainer}>
-        <b>Deliver food to</b>
+        <b>Outlet</b>
         <div className={s.numOfStores}>
-          <span>{numOfStores}</span>
-          <img style={{ width: 10, height: 8.6 }} alt="shop" src={shopIcon} />
+          <span style={{ fontWeight: "bold" }}>Table</span>
         </div>
-        <div>{location}</div>
+        <div>{outlet}</div>
         <div className={s.est}>
-          <span>{est}</span>
-          <img
-            style={{ width: 10, height: 8.6 }}
-            alt="est"
-            src={stopWatchIcon}
-          />
+          <span>{table}</span>
         </div>
       </div>
     </div>
