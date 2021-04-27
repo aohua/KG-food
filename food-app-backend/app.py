@@ -224,13 +224,31 @@ class SimilarItems(Resource):
         serialise_similar_items.append(dish_record)
         return serialise_similar_items
 
-        # similar_items = {}
-        # for record in result:
-        #     if record['ID(n)'] not in similar_items:
-        #         similar_items[record['ID(n)']] = []
-        #     similar_items[record['ID(n)']].extend([record['ID(o)']])
 
-        # return similar_items
+
+class Recommendation(Resource):
+    def get(self):
+        def get_recommendations(tx):
+            return list(tx.run(
+                '''
+                MATCH (n:Dish) 
+                RETURN ID(n), n.name, n.category, n.price, n.image, n.count
+                ORDER BY n.count DESC
+                LIMIT 20
+                '''
+            ))
+        db = get_db()
+        result = db.read_transaction(get_recommendations)
+        
+        serialise_recommendation = []
+
+        for record in result:
+            recommendation_record = {'id': record['ID(n)'], 'name': record['n.name'], 'category': record['n.category'],
+                'price': record['n.price'], 'image': record['n.image'], 'rank': record['n.count']}
+                
+            serialise_recommendation.append(recommendation_record)  # last dish
+        
+        return serialise_recommendation
 
 
 api.add_resource(Dish, '/dish')
@@ -239,19 +257,8 @@ api.add_resource(IngredientDish, '/ingredient_dish')
 api.add_resource(SimilarItems, '/similar_items')
 api.add_resource(ComplementaryItems, '/complementary_items')
 api.add_resource(Order, '/order')
+api.add_resource(Recommendation, '/recommendation')
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-# TODO
-# backend
-# add some complementary relationships
-# add new dish to neo4j (ingredients + dishes)
-# upload orders -> store into mongoDB (order number + dish id + user id) -> covert to complementary relationship (by Aohua)
-
-# frontend
-# add dish form
-# list order history
-# similar items
-# complementary items (Jeremy)
