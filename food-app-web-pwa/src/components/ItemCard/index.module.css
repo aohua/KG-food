@@ -1,4 +1,5 @@
 .container {
+  cursor: pointer;
 }
 .itemName {
   color: #2c4c5c;
