@@ -136,14 +136,14 @@ class Dish(Resource):
             , props={'price':price, 'count':0, 'category':dish_type, 'name': name, 'image': image}))
 
         # find ingredient
-        def find_ingredient(tx, id):
+        def find_ingredient(tx, name):
             return list(tx.run(
                 '''
                 MATCH (n:Ingredient) 
-                WHERE ID(n) = $id 
-                RETURN n
+                WHERE n.name = $name 
+                RETURN ID(n)
                 '''
-            ,id=id))
+            ,name=name))
 
         # create ingredient 
         def create_ingredient(tx, name):
@@ -181,13 +181,15 @@ class Dish(Resource):
                 # create dish to ingredient relationship
                 for ingredient in dish['ingredients']:
                     has_ingredient = db.write_transaction(
-                        find_ingredient, ingredient['id'])
-                    ingredient_id = ingredient['id']
+                        find_ingredient, ingredient['name'])
+                    ingredient_id = -1
                     if len(has_ingredient) == 0:
                         # create
                         ingredient_result = db.write_transaction(
                         create_ingredient, ingredient["name"])
                         ingredient_id = ingredient_result[0]['ID(n)']
+                    else:
+                        ingredient_id = has_ingredient[0]['ID(n)']
 
                     result = db.write_transaction(
                         create_relationship, dish_id, ingredient_id, ingredient['gram'])
