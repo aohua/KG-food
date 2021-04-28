@@ -113,6 +113,86 @@ class Dish(Resource):
         serialise_dish.append(dish_record)  # last dish
         return serialise_dish
 
+    def post(self):
+        dishes = request.get_json()  
+
+        # find dish 
+        def find_dish(tx, id):
+            return list(tx.run(
+                '''
+                MATCH (n:Dish) 
+                WHERE ID(n) = $id 
+                RETURN n
+                '''
+            , id=id))
+
+        # create dish
+        def create_dish(tx, price, dish_type, name, image):
+            return list(tx.run(
+                '''
+                CREATE (n:Dish:''' + dish_type + ''' $props)
+                RETURN ID(n)
+                '''
+            , props={'price':price, 'count':0, 'category':dish_type, 'name': name, 'image': image}))
+
+        # find ingredient
+        def find_ingredient(tx, id):
+            return list(tx.run(
+                '''
+                MATCH (n:Ingredient) 
+                WHERE ID(n) = $id 
+                RETURN n
+                '''
+            ,id=id))
+
+        # create ingredient 
+        def create_ingredient(tx, name):
+            return list(tx.run(
+                '''
+                CREATE (n:Ingredient {name: $name})
+                RETURN ID(n)
+                '''
+            , name=name))
+
+        # create relationship between dish and ingredient 
+        def create_relationship(tx, dish_id, ingredient_id, quantity):
+
+            return list(tx.run(
+                '''
+                MATCH (n:Dish), (m:Ingredient)
+                WHERE ID(n) = $dish_id AND ID(m) = $ingredient_id
+                MERGE (n)-[:CONTAINS {quantity:$quantity, unit:'gram'}]->(m)
+                RETURN n, m
+                '''
+            , dish_id=dish_id, ingredient_id=ingredient_id, quantity=quantity))
+
+        db = get_db()
+        for dish in dishes:
+            
+            has_dish = db.write_transaction(
+                        find_dish, dish['id'])
+
+            if len(has_dish) == 0: 
+                # create new dish
+                dish_result = db.write_transaction(
+                        create_dish, dish["price"], dish["category"], dish["name"], dish["image"])
+                dish_id = dish_result[0]['ID(n)']
+
+                # create dish to ingredient relationship
+                for ingredient in dish['ingredients']:
+                    has_ingredient = db.write_transaction(
+                        find_ingredient, ingredient['id'])
+                    ingredient_id = ingredient['id']
+                    if len(has_ingredient) == 0:
+                        # create
+                        ingredient_result = db.write_transaction(
+                        create_ingredient, ingredient["name"])
+                        ingredient_id = ingredient_result[0]['ID(n)']
+
+                    result = db.write_transaction(
+                        create_relationship, dish_id, ingredient_id, ingredient['gram'])
+
+        return {'status': 'done'} 
 
 class Category(Resource):
     def get(self):
