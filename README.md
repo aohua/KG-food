@@ -32,42 +32,6 @@
 
 ## USER GUIDE
 
-Frontend setup
-All the frontend code is under **food-app-web-pwa** folder.
+## PROJECT REPORT / PAPER
 
-You can access the deployed version here:
-
-```
-https://kg-food.web.app/
-```
-
-To run the project locally:
-
-Install node and yarn
-
-```
-brew install node
-
-brew install yarn
-```
-
-Install dependencies
-
-```
-cd food-app-web-pwa
-
-yarn install
-```
-
-Start the dev server
-
-```
-cd food-app-web-pwa
-yarn start
-```
-
-## Database setup
-
-#### Putian menu
-
-> Run db/kg_food_db.cypher in neo4j
+## MISCELLANEOUS
