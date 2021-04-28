@@ -203,6 +203,7 @@ class Category(Resource):
                 '''
                 MATCH (n:Dish) 
                 RETURN ID(n), n.name, n.category
+                ORDER BY n.category
                 '''
             ))
         db = get_db()
