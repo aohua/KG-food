@@ -5,7 +5,7 @@ type Props = {
   onAdminClick: () => void;
 };
 const Tab = ({ onOrderClick, onAdminClick }: Props) => {
-  const [active, setActive] = useState("orders");
+  const [active, setActive] = useState("admin");
   return (
     <div className={s.tabContainer}>
       <div
