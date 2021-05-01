@@ -26,7 +26,7 @@
 | Official Full Name | Student ID (MTech Applicable) | Work Items (Who Did What)                                                                                                                                                                                                                        |  Email (Optional)  |
 | ------------------ | :---------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------: |
 | Jeremy Lee         |                               |                                                                                                                                                                                                                                                  |                    |
-| MU AOHUA           |           A0121924M           | 1. On-device similar items recommendation model. </br> 2. Complentary item recommendation. (On-device and Server) </br> 3. Menu offline support </br> 4. User interface development </br> 5. Deploy frontend to firebase </br> 6. Project report | e0689785@u.nus.edu |
+| MU AOHUA           |           A0121924M           | 1. On-device similar items recommendation model. </br> 2. Complentary item recommendation. (On-device and Server) </br> 3. Menu offline support </br> 4. User interface development </br> 5. Deploy frontend to firebase </br> 6. Project report </br> 7. Video recording for Tech explanation | e0689785@u.nus.edu |
 
 ## VIDEO OF SYSTEM MODELLING & USE CASE DEMO
 
