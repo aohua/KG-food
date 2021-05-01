@@ -72,5 +72,5 @@ http://localhost:3000/
 Before you start to use the app, please make sure that you have already done the backend setup and have the backend server running at `http://127.0.0.1:5000`
 
 ## PROJECT REPORT / PAPER
-Refer to this GitHub link
+Refer to this GitHub [link](http://https://github.com/aohua/KG-food/blob/main/ProjectReport/Project%20Report%20Contactless%20Menu%20Recommendation.pdf "link")
 
