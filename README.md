@@ -19,7 +19,7 @@ Through this project, the team discovers a new understanding of creating a resta
 
 ## VIDEO OF SYSTEM MODELLING & USE CASE DEMO
 ### Business Case Video
-[![IBusiness Case Video](https://img.youtube.com/vi/boTNX_nHANg/0.jpg)](https://www.youtube.com/watch?v=boTNX_nHANg)
+[![IBusiness Case Video](https://img.youtube.com/vi/YAizL682t_k/0.jpg)](https://www.youtube.com/watch?v=YAizL682t_k)
 ### Technical Explanation Video
 [![ITechnical Explanation Video](https://img.youtube.com/vi/8ZRM5FSHo5w/0.jpg)](https://www.youtube.com/watch?v=8ZRM5FSHo5w)
 
