@@ -77,5 +77,24 @@ Refer to report here:
 https://github.com/aohua/KG-food/blob/main/ProjectReport/Project%20Report%20Contactless%20Menu%20Recommendation.pdf
 
 ## MISCELLANEOUS
-Expert Knowledge on Putien's menu and ingredients:
+#### Item 1 - Expert Knowledge Mapping:
 https://github.com/aohua/KG-food/blob/main/Miscellaneous/Putien%20Menu%20%20-%20Menu.pdf
+
+#### Item 2 - Load Speed Test
+GrabFood
+https://github.com/aohua/KG-food/blob/main/Miscellaneous/grabfood-first-load.png
+https://github.com/aohua/KG-food/blob/main/Miscellaneous/grabfood-subsequent-load.png
+
+Digital Menu Provider 
+https://github.com/aohua/KG-food/blob/main/Miscellaneous/imakan-first-load.png
+https://github.com/aohua/KG-food/blob/main/Miscellaneous/imakan-subsequent-load.png
+
+PDF (NOTE: We are unable to capture 1st load due to constant timeout)
+https://github.com/aohua/KG-food/blob/main/Miscellaneous/pdf-load.png
+
+Our Solution
+https://github.com/aohua/KG-food/blob/main/Miscellaneous/putien-first-load.png
+https://github.com/aohua/KG-food/blob/main/Miscellaneous/putien-subsequent-load.png
+
+#### Item 3 - User Feedback on Recommendation
+https://github.com/aohua/KG-food/blob/main/Miscellaneous/Recommendation-survey-result.png
