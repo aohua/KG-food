@@ -41,6 +41,7 @@ Seeding Neo4J Database
 Run the 2 cypher scripts here in sequence
 
 https://github.com/aohua/KG-food/blob/main/db/kg_food_db.cypher
+
 https://github.com/aohua/KG-food/blob/main/db/kg_food_complementary.cypher
 #### Backend setup
 Start both MongoDB and Neo4J databases before running the actual backend
@@ -72,5 +73,9 @@ http://localhost:3000/
 Before you start to use the app, please make sure that you have already done the backend setup and have the backend server running at `http://127.0.0.1:5000`
 
 ## PROJECT REPORT / PAPER
-Refer to this GitHub [link](http://https://github.com/aohua/KG-food/blob/main/ProjectReport/Project%20Report%20Contactless%20Menu%20Recommendation.pdf "link")
+Refer to report here:
+https://github.com/aohua/KG-food/blob/main/ProjectReport/Project%20Report%20Contactless%20Menu%20Recommendation.pdf
 
+## MISCELLANEOUS
+Expert Knowledge on Putien's menu and ingredients:
+https://github.com/aohua/KG-food/blob/main/Miscellaneous/Putien%20Menu%20%20-%20Menu.pdf
